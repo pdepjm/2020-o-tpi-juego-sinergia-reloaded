@@ -26,6 +26,7 @@ class Jugador{
 // sería igual que construir pero con otro metodo para el martillo asi que hay que abstraer la logica
 //	method destruir() = 
 
+
 }
 
 class Agente inherits Jugador{
