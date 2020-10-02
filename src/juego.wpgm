@@ -3,8 +3,9 @@ import jugadores.*
 import objetos.*
 import habilidades.*
 import utilities.teclas.*
+import mapas.mapa.*
 
-program game {
+program game{
 	
 	game.width(30)
 	game.height(15)
@@ -14,6 +15,8 @@ program game {
 	
 	game.addVisualCharacter(new Villano())
 	game.addVisualCharacter(new Agente())
+	
+	game.at(2,3).addVisual(new Villano())
 	
 	
 	game.start()

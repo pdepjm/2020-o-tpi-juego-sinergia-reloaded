@@ -2,6 +2,11 @@ import jugadores.*
 
 class Objeto {
 	
+	method aparecer() {}
+	method desaparecer() {}
+	method serUtilizadoEn(destinatario) {}
+	method serUtilizado() {}
+	
 }
 
 
