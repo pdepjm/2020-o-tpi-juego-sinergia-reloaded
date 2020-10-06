@@ -1,5 +1,4 @@
 import objetos.*
-import habilidades.*
 import wollok.game.*
 import utilities.teclas.*
 import mapas.mapa.*
@@ -8,9 +7,17 @@ class Jugador{
 	var property position = game.center()
 	var objetoEncontrado = null
 	var property posicionPoder
+	var property posicionMartillo
+	var property positionInicial
 	var puedeConstruir = true
 	var movimientosHabilitados = true
-	const martillo = new Martillo()
+	
+	const martillo = new Martillo(image = "Objetos/martillo.png", position = self.posicionMartillo())
+	
+	method iniciar(){
+		self.positionInicial()
+		self.habilitarConstruccion()
+	}
 	
 	method usarObjeto(){
 		objetoEncontrado.usar(self)
@@ -31,6 +38,7 @@ class Jugador{
 	
 	method habilitarConstruccion(){
 		puedeConstruir = true
+		martillo.aparecer()
 	}
 	
 	method nuevaPosicion(direccion){
@@ -82,14 +90,25 @@ class Jugador{
 
 object agente inherits Jugador{
 	const property contrincante = villano
-	var vidas = 3
+	var vidas = [vida1, vida2, vida3]
 	var property image = "Personajes/agente_adelante.png"
 	
 	method esAgente() = true
 	
 	override method posicionPoder() = game.at(0,5)
 	
-	method positionInicial(){
+	override method posicionMartillo() = game.at(0,3)
+	
+	override method iniciar(){
+		super()
+		self.mostrarVidas()
+	}
+	
+	method mostrarVidas(){
+		vidas.forEach({vida => game.addVisual(vida)})
+	}
+	
+	override method positionInicial(){
 		position = game.at(20,6)
 	}
 	
@@ -99,23 +118,25 @@ object agente inherits Jugador{
 	}
 	
 	method perderVida() {
-		vidas -= 1
-		if(vidas == 0){
+		const ultimaVida = vidas.last()
+		game.removeVisual(ultimaVida)
+		vidas.remove(ultimaVida)
+		if(vidas.isEmpty()){
 			game.say(villano, "Suerte la proxima campeon")
-			game.schedule(5000, {game.stop()})
+			game.schedule(3000, {game.stop()})
 		}
 	}	
 	
 	method recuperarVida(){
-		if(vidas < 3){
-			vidas += 1
+		if(vidas.size() == 1){
+			vidas.add(vida2)
+			game.addVisual(vida2)
+		} else if (vidas.size()==2){
+			vidas.add(vida3)
+			game.addVisual(vida3)
 		}
 	}	
 	
-	override method habilitarConstruccion(){
-		super()
-		game.addVisualIn(martillo, game.at(0,1))
-	}
 	
 	override method cambiarImagen(direccion){
 		if(direccion == "up"){
@@ -138,12 +159,9 @@ object villano inherits Jugador{
 	
 	override method posicionPoder() = game.at(24,5)
 	
-	override method habilitarConstruccion(){
-		super()
-		game.addVisualIn(martillo, game.at(24,1))
-	}
+	override method posicionMartillo() = game.at(24,3)
 	
-	method positionInicial(){
+	override method positionInicial(){
 		position = game.at(6,7)
 	}
 	

@@ -5,12 +5,23 @@ import mapas.mapa.*
 class Objeto {
 	var property image
 	var property position
+	
+	method aparecer(){
+		game.addVisual(self)
+	}
+	
+	method desaparecer() {
+		game.removeVisual(self)
+	}
+}
 
-	method aparecer() {
+class Poder inherits Objeto{
+	
+	override method aparecer() {
 		const x = (mapa.bordeIzquierdo()+1).randomUpTo(mapa.bordeDerecho()-1)
 		const y = (mapa.bordeInferior()+1).randomUpTo(mapa.bordeSuperior()-1)
 		position = game.at (x, y)
-		game.addVisual(self)
+		super()
 	}
 	
 	method crearReplica(direccion){return new Objeto()}
@@ -20,16 +31,14 @@ class Objeto {
 		self.aparecer()
 	}
 	
-	method desaparecer() {
-		game.removeVisual(self)
-	}
+	
 	
 	method usar(jugador) {
 		self.desaparecer()
 	}	
 }
 
-class LiquidoAzul inherits Objeto {
+class LiquidoAzul inherits Poder {
 	
 	override method crearReplica(direccion){
 		return new LiquidoAzul(image="Objetos/objeto_azul.png", position = direccion)
@@ -41,14 +50,14 @@ class LiquidoAzul inherits Objeto {
 	}
 }
 
-class LiquidoVerde inherits Objeto {
+class LiquidoVerde inherits Poder {
 
 	override method crearReplica(direccion){
 		return new LiquidoVerde(image="Objetos/objeto_amarillo.png", position = direccion)
 	}
 }
 
-class LiquidoRojo inherits Objeto {
+class LiquidoRojo inherits Poder {
 	override method crearReplica(direccion){
 		return new LiquidoRojo(image="Objetos/objeto_rojo.png", position = direccion)
 	}
@@ -64,6 +73,19 @@ class LiquidoRojo inherits Objeto {
 class Bomba {
 	
 }
+
+class Martillo inherits Objeto {
+	method construir(){
+		
+	}
+}
+
+
+const vida1 = new Objeto(image = "Objetos/vida.png", position = game.at(0,13))
+
+const vida2 = new Objeto(image = "Objetos/vida.png", position = game.at(0,12))
+
+const vida3 = new Objeto(image = "Objetos/vida.png", position = game.at(0,11))
 
 const objetoAzul = new LiquidoAzul(image="Objetos/objeto_azul.png", position = game.at(14,5))
 

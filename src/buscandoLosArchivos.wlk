@@ -36,6 +36,9 @@ object buscandoLosArchivos {
 		objetoAzul.aparecer()
 		objetoVerde.aparecer()
 		objetoRojo.aparecer()
+		vida1.aparecer()
+		vida2.aparecer()
+		vida3.aparecer()
 	}
 	
 	method configurarAcciones(){
