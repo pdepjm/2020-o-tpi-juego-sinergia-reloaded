@@ -21,22 +21,11 @@ object teclas{
 		keyboard.left().onPressDo({agente.moverseA("left")})		
 		// Habilidades y Objetos Personaj 2
 		//keyboard.l().onPressDo (agente.construir())
-		//keyboard.k().onPressDo {  }	
+		keyboard.k().onPressDo ({agente.usarObjeto()})	
 		
 		}
-	
-	method desconfigurar(personaje){
-		if(personaje == villano){
-			keyboard.e().onPressDo({villano.moverseA(villano.position())})
-			keyboard.f().onPressDo({villano.moverseA(villano.position())})
-			keyboard.d().onPressDo({villano.moverseA(villano.position())})
-			keyboard.s().onPressDo({villano.moverseA(villano.position())})
-		} else {
-			keyboard.up().onPressDo({agente.moverseA(agente.position())})	
-			keyboard.right().onPressDo({agente.moverseA(agente.position())})	
-			keyboard.down().onPressDo({agente.moverseA(agente.position())})		
-			keyboard.left().onPressDo({agente.moverseA(agente.position())})		
-		}
+	method desconfigurar(jugador){
+		jugador.quieto()
 	}
 		
 }

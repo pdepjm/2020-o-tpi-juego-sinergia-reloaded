@@ -1,58 +1,64 @@
 import jugadores.*
 import wollok.game.*
+import mapas.mapa.*
 
 class Objeto {
 	var property image
 	var property position
 
 	method aparecer() {
-		const x = 2.randomUpTo(26).truncate(0)
-		const y = 0.randomUpTo(14).truncate(0)
+		const x = (mapa.bordeIzquierdo()-1).randomUpTo(mapa.bordeDerecho()-1).truncate(0)
+		const y = mapa.bordeInferior().randomUpTo(mapa.bordeSuperior()).truncate(0)
 		position = game.at (x, y)
 		game.addVisual(self)
 	}
 	
-	method atrapado(destinoImagen){
+	method crearReplica(direccion){return new Objeto()}
+	
+	method atrapado(){
 		self.desaparecer()
+		self.aparecer()
 	}
 	
 	method desaparecer() {
 		game.removeVisual(self)
-		
 	}
 	
-	method usar(jugador) {	}	
+	method usar(jugador) {
+		self.desaparecer()
+	}	
 }
 
 class LiquidoAzul inherits Objeto {
-	override method atrapado(direccion){
-		super(direccion)
-		game.addVisualIn("objeto_azul.png", direccion)
+	
+	override method crearReplica(direccion){
+		return new LiquidoAzul(image="objeto_azul.png", position = direccion)
 	}
 	
 	override method usar(jugador){
 		jugador.contrincante().quedarseQuieto(10000)
+		super(jugador)
 	}
 }
 
 class LiquidoVerde inherits Objeto {
-	override method atrapado(direccion){
-		super(direccion)
-		game.addVisualIn("objeto_amarillo.png", direccion)
+
+	override method crearReplica(direccion){
+		return new LiquidoVerde(image="objeto_amarillo.png", position = direccion)
 	}
 }
 
 class LiquidoRojo inherits Objeto {
+	override method crearReplica(direccion){
+		return new LiquidoRojo(image="objeto_rojo.png", position = direccion)
+	}
+	
 	override method usar(jugador){
 		if(jugador.esAgente()){
 			jugador.recuperarVida()
 		}
 	}
-	override method atrapado(direccion){
-		super(direccion)
-		game.addVisualIn("objeto_rojo.png", direccion)
-	}
-	
+
 }
 
 class Bomba {

@@ -19,8 +19,8 @@ object buscandoLosArchivos {
 		game.width(25)
 		game.height(14)
 		game.title("Juego Base")
-		game.boardGround("fondo.png")
-		mapa.configurarMapa()
+		game.boardGround("piso.png")
+		//mapa.configurarMapa()
 	}
 	
 	method agregarPersonajes(){

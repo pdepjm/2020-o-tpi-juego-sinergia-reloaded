@@ -2,16 +2,20 @@ import objetos.*
 import habilidades.*
 import wollok.game.*
 import utilities.teclas.*
+import mapas.mapa.*
 
 class Jugador{
 	var property position = game.center()
-	var objetoEncontrado
+	var objetoEncontrado = null
 	var property posicionPoder
 	var puedeConstruir = true
+	var movimientosHabilitados = true
 	const martillo = new Martillo()
 	
-	method usarObjeto() = objetoEncontrado.usar(self)
-	
+	method usarObjeto(){
+		objetoEncontrado.usar(self)
+		objetoEncontrado = null
+	}
 	method construir(){
 		
 		if (puedeConstruir) {
@@ -30,35 +34,44 @@ class Jugador{
 	}
 	
 	method nuevaPosicion(direccion){
-		if (direccion == "up" && position.y()+1 < 14){
-			return self.position().up(1)
+		if(movimientosHabilitados){
+			if (direccion == "up" && position.y()+1 < mapa.bordeSuperior()){
+				return self.position().up(1)
+			}
+			if (direccion == "down" && position.y()-1 > mapa.bordeInferior()){
+				return self.position().down(1)
+			}
+			if (direccion == "right" && position.x()+1 < mapa.bordeDerecho()){
+				return self.position().right(1)
+			} 
+			if (direccion == "left" && position.x()-1 > mapa.bordeIzquierdo()){
+				return self.position().left(1)
+			}
 		}
-		if (direccion == "down" && position.y()-1 > 0){
-			return self.position().down(1)
-		}
-		if (direccion == "right" && position.x()+1 < 27){
-			return self.position().right(1)
-		} 
-		if (direccion == "left" && position.x()-1 > 1){
-			return self.position().left(1)
-		}
+		
 		return position
 
 	}
 	
+	method cambiarImagen(direccion){}
+	
 	method moverseA(direccion){
+		self.cambiarImagen(direccion)
 		position = self.nuevaPosicion(direccion)
 	}
 	
 	method quedarseQuieto(milisegundos){
-		teclas.desconfigurar(self)
-		//schedule(milisegundo, {=>teclas.configurar()})
+		movimientosHabilitados = false
+		//schedule(milisegundo, {movimientosHabilitados = true})
 	}
 	
 	method guardarObjeto(objeto){
-		objetoEncontrado = objeto
-		objeto.atrapado(self.posicionPoder())
-		objeto.aparecer()
+		if(objetoEncontrado != null){
+			game.removeVisual(objetoEncontrado)
+		} 
+		objetoEncontrado = objeto.crearReplica(self.posicionPoder())
+		game.addVisual(objetoEncontrado)
+		objeto.atrapado()
 	}
 	
 // sería igual que construir pero con otro metodo para el martillo asi que hay que abstraer la logica
@@ -70,7 +83,7 @@ class Jugador{
 object agente inherits Jugador{
 	const property contrincante = villano
 	var vidas = 3
-	method image() = "jugador.png"
+	var property image = "agente_adelante.png"
 	
 	method esAgente() = true
 	
@@ -103,19 +116,31 @@ object agente inherits Jugador{
 		super()
 		game.addVisualIn(martillo, game.at(0,1))
 	}
+	
+	override method cambiarImagen(direccion){
+		if(direccion == "up"){
+			image = "agente_back.png"
+		} else if (direccion == "right"){
+			image = "agente_der.png"
+		} else if (direccion == "down"){
+			image = "agente_adelante.png"
+		} else if (direccion == "left"){
+			image = "agente_izq.png"
+		}
+	}
 }
 
 object villano inherits Jugador{
 	const property contrincante = agente
-	method image() = "villano.png"
+	var property image =  "villano_adelante.png"
 	
 	method esAgente() = false
 	
-	override method posicionPoder() = game.at(25,5)
+	override method posicionPoder() = game.at(24,5)
 	
 	override method habilitarConstruccion(){
 		super()
-		game.addVisualIn(martillo, game.at(25,1))
+		game.addVisualIn(martillo, game.at(24,1))
 	}
 	
 	method positionInicial(){
@@ -125,6 +150,18 @@ object villano inherits Jugador{
 	method atrapar(){
 		self.quedarseQuieto(3000)
 		game.say(self, "Una vida menos jajaja")
+	}
+	
+	override method cambiarImagen(direccion){
+		if(direccion == "up"){
+			image = "villano_back.png"
+		} else if (direccion == "right"){
+			image = "villano_back.png"
+		} else if (direccion == "down"){
+			image = "villano_adelante.png"
+		} else if (direccion == "left"){
+			image = "villano_adelante.png"
+		}
 	}
 }
 
