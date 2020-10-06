@@ -1,7 +1,6 @@
 import wollok.game.*
 import jugadores.*
 import objetos.*
-import habilidades.*
 import utilities.teclas.*
 import mapas.mapa.*
 
@@ -25,20 +24,15 @@ object buscandoLosArchivos {
 	
 	method agregarPersonajes(){
 		game.addVisual(villano)
-		villano.positionInicial()
 		game.addVisual(agente)
-		agente.positionInicial()
-		agente.habilitarConstruccion()
-		villano.habilitarConstruccion()
+		agente.iniciar()
+		villano.iniciar()
 	}
 	
 	method agregarObjetos(){
 		objetoAzul.aparecer()
 		objetoVerde.aparecer()
 		objetoRojo.aparecer()
-		vida1.aparecer()
-		vida2.aparecer()
-		vida3.aparecer()
 	}
 	
 	method configurarAcciones(){
@@ -46,5 +40,6 @@ object buscandoLosArchivos {
 		game.onCollideDo(objetoRojo, {personaje => personaje.guardarObjeto(objetoRojo)})
 		game.onCollideDo(objetoVerde, {personaje => personaje.guardarObjeto(objetoVerde)})
 		game.onCollideDo(villano, {personaje => personaje.atrapado()})
+		game.onCollideDo(agente, {pinches=>pinches.pinchar()})
 	}
 }

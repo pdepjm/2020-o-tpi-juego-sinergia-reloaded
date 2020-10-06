@@ -13,16 +13,20 @@ class Objeto {
 	method desaparecer() {
 		game.removeVisual(self)
 	}
+	
+	method atrapado(){}
 }
 
-class Poder inherits Objeto{
-	
+class ObjetoAleatorio inherits Objeto{
 	override method aparecer() {
 		const x = (mapa.bordeIzquierdo()+1).randomUpTo(mapa.bordeDerecho()-1)
 		const y = (mapa.bordeInferior()+1).randomUpTo(mapa.bordeSuperior()-1)
 		position = game.at (x, y)
 		super()
 	}
+}
+
+class Poder inherits ObjetoAleatorio{
 	
 	method crearReplica(direccion){return new Objeto()}
 	
@@ -30,8 +34,6 @@ class Poder inherits Objeto{
 		self.desaparecer()
 		self.aparecer()
 	}
-	
-	
 	
 	method usar(jugador) {
 		self.desaparecer()
@@ -55,6 +57,15 @@ class LiquidoVerde inherits Poder {
 	override method crearReplica(direccion){
 		return new LiquidoVerde(image="Objetos/objeto_amarillo.png", position = direccion)
 	}
+	
+	override method usar(jugador){
+		if (jugador.esAgente()){
+			jugador.teletransportarse()
+		} else {
+			
+		}
+		super(jugador)
+	}
 }
 
 class LiquidoRojo inherits Poder {
@@ -65,13 +76,18 @@ class LiquidoRojo inherits Poder {
 	override method usar(jugador){
 		if(jugador.esAgente()){
 			jugador.recuperarVida()
+		} else {
+			jugador.ponerPinches()
 		}
+		super(jugador)
 	}
-
 }
 
-class Bomba {
-	
+class Pinches inherits ObjetoAleatorio {
+	method pinchar(){
+		agente.perderVida()
+		self.desaparecer()
+	}
 }
 
 class Martillo inherits Objeto {

@@ -9,6 +9,7 @@ class Jugador{
 	var property posicionPoder
 	var property posicionMartillo
 	var property positionInicial
+	var ultimaDireccion = "down"
 	var puedeConstruir = true
 	var movimientosHabilitados = true
 	
@@ -23,6 +24,7 @@ class Jugador{
 		objetoEncontrado.usar(self)
 		objetoEncontrado = null
 	}
+	
 	method construir(){
 		
 		if (puedeConstruir) {
@@ -44,15 +46,19 @@ class Jugador{
 	method nuevaPosicion(direccion){
 		if(movimientosHabilitados){
 			if (direccion == "up" && position.y()+1 < mapa.bordeSuperior()){
+				ultimaDireccion = "up"
 				return self.position().up(1)
 			}
 			if (direccion == "down" && position.y()-1 > mapa.bordeInferior()){
+				ultimaDireccion = "down"
 				return self.position().down(1)
 			}
 			if (direccion == "right" && position.x()+1 < mapa.bordeDerecho()){
+				ultimaDireccion = "right"
 				return self.position().right(1)
 			} 
 			if (direccion == "left" && position.x()-1 > mapa.bordeIzquierdo()){
+				ultimaDireccion = "left"
 				return self.position().left(1)
 			}
 		}
@@ -70,7 +76,7 @@ class Jugador{
 	
 	method quedarseQuieto(milisegundos){
 		movimientosHabilitados = false
-		//schedule(milisegundo, {movimientosHabilitados = true})
+		//schedule(milisegundo, {=>movimientosHabilitados = true})
 	}
 	
 	method guardarObjeto(objeto){
@@ -82,6 +88,17 @@ class Jugador{
 		objeto.atrapado()
 	}
 	
+	method posicionAModificar(){
+		if (ultimaDireccion == "up"){
+			return position.up(1)
+		} else if (ultimaDireccion == "down"){
+			return position.down(1)
+		} else if (ultimaDireccion == "right"){
+			return position.right(1)
+		}
+		return position.left(1)
+	}
+	
 // sería igual que construir pero con otro metodo para el martillo asi que hay que abstraer la logica
 //	method destruir() = 
 
@@ -90,7 +107,7 @@ class Jugador{
 
 object agente inherits Jugador{
 	const property contrincante = villano
-	var vidas = [vida1, vida2, vida3]
+	const vidas = [vida1, vida2, vida3]
 	var property image = "Personajes/agente_adelante.png"
 	
 	method esAgente() = true
@@ -149,6 +166,12 @@ object agente inherits Jugador{
 			image = "Personajes/agente_izq.png"
 		}
 	}
+	
+	method teletransportarse(){
+		const x = (mapa.bordeIzquierdo()+1).randomUpTo(mapa.bordeDerecho()-1)
+		const y = (mapa.bordeInferior()+1).randomUpTo(mapa.bordeSuperior()-1)
+		position = game.at (x, y)
+	}
 }
 
 object villano inherits Jugador{
@@ -180,6 +203,11 @@ object villano inherits Jugador{
 		} else if (direccion == "left"){
 			image = "Personajes/villano_adelante.png"
 		}
+	}
+	
+	method ponerPinches(){
+		const bomba = new Pinches(image = "Objetos/pinches.png", position = self.posicionAModificar())
+		game.addVisual(bomba) 
 	}
 }
 
