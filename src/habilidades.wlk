@@ -2,7 +2,7 @@ import wollok.game.*
 import jugadores.*
 
 class Martillo {
-	method image() = "martillo.png"
+	method image() = "Objetos/martillo.png"
 	
 	method construir(){
 		

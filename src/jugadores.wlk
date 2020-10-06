@@ -83,7 +83,7 @@ class Jugador{
 object agente inherits Jugador{
 	const property contrincante = villano
 	var vidas = 3
-	var property image = "agente_adelante.png"
+	var property image = "Personajes/agente_adelante.png"
 	
 	method esAgente() = true
 	
@@ -119,20 +119,20 @@ object agente inherits Jugador{
 	
 	override method cambiarImagen(direccion){
 		if(direccion == "up"){
-			image = "agente_back.png"
+			image = "Personajes/agente_back.png"
 		} else if (direccion == "right"){
-			image = "agente_der.png"
+			image = "Personajes/agente_der.png"
 		} else if (direccion == "down"){
-			image = "agente_adelante.png"
+			image = "Personajes/agente_adelante.png"
 		} else if (direccion == "left"){
-			image = "agente_izq.png"
+			image = "Personajes/agente_izq.png"
 		}
 	}
 }
 
 object villano inherits Jugador{
 	const property contrincante = agente
-	var property image =  "villano_adelante.png"
+	var property image =  "Personajes/villano_adelante.png"
 	
 	method esAgente() = false
 	
@@ -154,13 +154,13 @@ object villano inherits Jugador{
 	
 	override method cambiarImagen(direccion){
 		if(direccion == "up"){
-			image = "villano_back.png"
+			image = "Personajes/villano_back.png"
 		} else if (direccion == "right"){
-			image = "villano_back.png"
+			image = "Personajes/villano_back.png"
 		} else if (direccion == "down"){
-			image = "villano_adelante.png"
+			image = "Personajes/villano_adelante.png"
 		} else if (direccion == "left"){
-			image = "villano_adelante.png"
+			image = "Personajes/villano_adelante.png"
 		}
 	}
 }

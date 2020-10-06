@@ -7,8 +7,8 @@ class Objeto {
 	var property position
 
 	method aparecer() {
-		const x = (mapa.bordeIzquierdo()-1).randomUpTo(mapa.bordeDerecho()-1).truncate(0)
-		const y = mapa.bordeInferior().randomUpTo(mapa.bordeSuperior()).truncate(0)
+		const x = (mapa.bordeIzquierdo()+1).randomUpTo(mapa.bordeDerecho()-1)
+		const y = (mapa.bordeInferior()+1).randomUpTo(mapa.bordeSuperior()-1)
 		position = game.at (x, y)
 		game.addVisual(self)
 	}
@@ -32,7 +32,7 @@ class Objeto {
 class LiquidoAzul inherits Objeto {
 	
 	override method crearReplica(direccion){
-		return new LiquidoAzul(image="objeto_azul.png", position = direccion)
+		return new LiquidoAzul(image="Objetos/objeto_azul.png", position = direccion)
 	}
 	
 	override method usar(jugador){
@@ -44,13 +44,13 @@ class LiquidoAzul inherits Objeto {
 class LiquidoVerde inherits Objeto {
 
 	override method crearReplica(direccion){
-		return new LiquidoVerde(image="objeto_amarillo.png", position = direccion)
+		return new LiquidoVerde(image="Objetos/objeto_amarillo.png", position = direccion)
 	}
 }
 
 class LiquidoRojo inherits Objeto {
 	override method crearReplica(direccion){
-		return new LiquidoRojo(image="objeto_rojo.png", position = direccion)
+		return new LiquidoRojo(image="Objetos/objeto_rojo.png", position = direccion)
 	}
 	
 	override method usar(jugador){
@@ -65,9 +65,9 @@ class Bomba {
 	
 }
 
-const objetoAzul = new LiquidoAzul(image="objeto_azul.png", position = game.at(14,5))
+const objetoAzul = new LiquidoAzul(image="Objetos/objeto_azul.png", position = game.at(14,5))
 
-const objetoVerde = new LiquidoVerde(image="objeto_amarillo.png", position = game.at(4,10))
+const objetoVerde = new LiquidoVerde(image="Objetos/objeto_amarillo.png", position = game.at(4,10))
 
-const objetoRojo = new LiquidoRojo(image="objeto_rojo.png", position = game.at(10,9))
+const objetoRojo = new LiquidoRojo(image="Objetos/objeto_rojo.png", position = game.at(10,9))
 
