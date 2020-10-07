@@ -47,7 +47,7 @@ class LiquidoAzul inherits Poder {
 	}
 	
 	override method usar(jugador){
-		jugador.contrincante().quedarseQuieto(10000)
+		jugador.contrincante().quedarseQuieto(3000)
 		super(jugador)
 	}
 }
@@ -62,6 +62,7 @@ class LiquidoVerde inherits Poder {
 		if (jugador.esAgente()){
 			jugador.teletransportarse()
 		} else {
+			// villano hace que el agente pierda un objeto
 			
 		}
 		super(jugador)
@@ -91,7 +92,7 @@ class Pinches inherits ObjetoAleatorio {
 }
 
 class Martillo inherits Objeto {
-	method construir(){
+	method construir(persona){
 		
 	}
 }

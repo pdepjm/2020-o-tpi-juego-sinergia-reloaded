@@ -21,17 +21,20 @@ class Jugador{
 	}
 	
 	method usarObjeto(){
+		if(objetoEncontrado!= null){
 		objetoEncontrado.usar(self)
 		objetoEncontrado = null
+		}
+		else {game.say(self,"No tengo ningún objeto")}
 	}
 	
 	method construir(){
 		
 		if (puedeConstruir) {
-			martillo.construir()
+			martillo.construir(self)
 			puedeConstruir = false
 			martillo.desaparecer()
-			//schedule(15000, {self.habilitarConstruccion()})
+			game.schedule(15000, {self.habilitarConstruccion()})
 		}
 		else {
 			game.say(self,"No puedo construir todavía")
@@ -76,7 +79,7 @@ class Jugador{
 	
 	method quedarseQuieto(milisegundos){
 		movimientosHabilitados = false
-		//schedule(milisegundo, {=>movimientosHabilitados = true})
+		game.schedule(milisegundos, {=>movimientosHabilitados = true})
 	}
 	
 	method guardarObjeto(objeto){
@@ -98,10 +101,6 @@ class Jugador{
 		}
 		return position.left(1)
 	}
-	
-// sería igual que construir pero con otro metodo para el martillo asi que hay que abstraer la logica
-//	method destruir() = 
-
 
 }
 
@@ -155,6 +154,7 @@ object agente inherits Jugador{
 	}	
 	
 	
+// se podria abstraer a la Class Jugador
 	override method cambiarImagen(direccion){
 		if(direccion == "up"){
 			image = "Personajes/agente_back.png"
