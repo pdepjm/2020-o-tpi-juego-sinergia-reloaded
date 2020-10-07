@@ -3,8 +3,10 @@ import jugadores.*
 import objetos.*
 import utilities.teclas.*
 import mapas.mapa.*
+import villano.*
+import agente.*
 
-object buscandoLosArchivos {
+object configuracion{
 	method iniciar(){
 		self.configurarJuego()
 		self.agregarPersonajes()

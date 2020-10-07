@@ -2,6 +2,8 @@ import jugadores.*
 import wollok.game.*
 import mapas.mapa.*
 import utilities.aleatorio.*
+import villano.*
+import agente.*
 
 class Objeto {
 	var property image 

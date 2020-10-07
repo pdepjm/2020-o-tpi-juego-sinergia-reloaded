@@ -1,5 +1,7 @@
 import wollok.game.*
 import jugadores.*
+import villano.*
+import agente.*
 
 object teclas{
 	
