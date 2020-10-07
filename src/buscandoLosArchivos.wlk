@@ -11,7 +11,7 @@ object buscandoLosArchivos {
 		teclas.configurar()
 		self.agregarObjetos()
 		self.configurarAcciones()
-		
+		mapa.configurarMapa()
 		game.start()
 	}
 	
@@ -34,13 +34,16 @@ object buscandoLosArchivos {
 		objetoAzul.aparecer()
 		objetoVerde.aparecer()
 		objetoRojo.aparecer()
+		objetoColeccionable1.aparecer()
+		objetoColeccionable2.aparecer()
+		objetoColeccionable3.aparecer()
+		objetoColeccionable4.aparecer()
 	}
 	
 	method configurarAcciones(){
 		game.onCollideDo(objetoAzul, {personaje => personaje.guardarObjeto(objetoAzul)})
 		game.onCollideDo(objetoRojo, {personaje => personaje.guardarObjeto(objetoRojo)})
 		game.onCollideDo(objetoVerde, {personaje => personaje.guardarObjeto(objetoVerde)})
-		game.onCollideDo(villano, {personaje => personaje.atrapado()})
-		game.onCollideDo(agente, {pinches=>pinches.pinchar()})
+		game.onCollideDo(agente, {objetoEncontrado => objetoEncontrado.interactuar()})
 	}
 }

@@ -1,9 +1,10 @@
 import jugadores.*
 import wollok.game.*
 import mapas.mapa.*
+import utilities.aleatorio.*
 
 class Objeto {
-	var property image
+	var property image 
 	var property position
 	
 	method aparecer(){
@@ -14,15 +15,33 @@ class Objeto {
 		game.removeVisual(self)
 	}
 	
-	method atrapado(){}
 }
 
 class ObjetoAleatorio inherits Objeto{
 	override method aparecer() {
-		const x = (mapa.bordeIzquierdo()+1).randomUpTo(mapa.bordeDerecho()-1)
-		const y = (mapa.bordeInferior()+1).randomUpTo(mapa.bordeSuperior()-1)
-		position = game.at (x, y)
+		position = aleatorio.nuevaPosicion()
 		super()
+	}
+}
+
+class ObjetoColeccionable inherits ObjetoAleatorio{
+	
+	var property posicionDestino
+
+    method atrapado(){
+		self.desaparecer()
+		position = posicionDestino
+		game.addVisual(self)
+	}
+	
+	method interactuar(){ 
+		self.atrapado()
+		agente.guardarColeccionable(self)
+	}
+	
+	method reaparecer() {
+		self.desaparecer()
+		self.aparecer()
 	}
 }
 
@@ -62,7 +81,7 @@ class LiquidoVerde inherits Poder {
 		if (jugador.esAgente()){
 			jugador.teletransportarse()
 		} else {
-			// villano hace que el agente pierda un objeto
+			agente.perderColeccionable()
 			
 		}
 		super(jugador)
@@ -84,14 +103,14 @@ class LiquidoRojo inherits Poder {
 	}
 }
 
-class Pinches inherits ObjetoAleatorio {
-	method pinchar(){
+class Pinches inherits Objeto {
+	method interactuar(){
 		agente.perderVida()
 		self.desaparecer()
 	}
 }
 
-class Pared inherits ObjetoAleatorio {
+class Pared inherits Objeto {
 	
 }
 
@@ -117,3 +136,7 @@ const objetoVerde = new LiquidoVerde(image="Objetos/objeto_amarillo.png", positi
 
 const objetoRojo = new LiquidoRojo(image="Objetos/objeto_rojo.png", position = game.at(10,9))
 
+const objetoColeccionable1 = new ObjetoColeccionable(image="chili.png", position=game.at(10,8), posicionDestino=game.at(0,5))
+const objetoColeccionable2 = new ObjetoColeccionable(image="orange.png", position=game.at(10,8), posicionDestino=game.at(0,6))
+const objetoColeccionable3 = new ObjetoColeccionable(image="Strawberry.png", position=game.at(10,8), posicionDestino=game.at(0,7))
+const objetoColeccionable4 = new ObjetoColeccionable(image="watermelon.png", position=game.at(10,8), posicionDestino=game.at(0,8))

@@ -1,6 +1,7 @@
 import objetos.*
 import wollok.game.*
 import utilities.teclas.*
+import utilities.aleatorio.*
 import mapas.mapa.*
 
 class Jugador{
@@ -12,6 +13,7 @@ class Jugador{
 	var ultimaDireccion = "down"
 	var puedeConstruir = true
 	var movimientosHabilitados = true
+	
 	
 	const martillo = new Martillo(image = "Objetos/martillo.png", position = self.posicionMartillo())
 	
@@ -109,10 +111,11 @@ object agente inherits Jugador{
 	const property contrincante = villano
 	const vidas = [vida1, vida2, vida3]
 	var property image = "Personajes/agente_adelante.png"
+	const objetosColeccionados = []
 	
 	method esAgente() = true
 	
-	override method posicionPoder() = game.at(0,5)
+	override method posicionPoder() = game.at(0,2)
 	
 	override method posicionMartillo() = game.at(0,3)
 	
@@ -131,7 +134,6 @@ object agente inherits Jugador{
 	
 	method atrapado() {
 		self.perderVida()
-		villano.atrapar()
 	}
 	
 	method perderVida() {
@@ -139,7 +141,7 @@ object agente inherits Jugador{
 		game.removeVisual(ultimaVida)
 		vidas.remove(ultimaVida)
 		if(vidas.isEmpty()){
-			game.say(villano, "Suerte la proxima campeon")
+			game.say(villano, "Yo gano hoy, suerte la proxima campeon")
 			game.schedule(3000, {game.stop()})
 		}
 	}	
@@ -155,6 +157,15 @@ object agente inherits Jugador{
 	}	
 	
 	
+	method guardarColeccionable(coleccionable){ 
+		objetosColeccionados.add(coleccionable)
+		if(objetosColeccionados.size() == 4){
+			game.say(self, "Yo gano hoy, suerte la proxima campeon")
+			game.schedule(3000, {game.stop()})
+			}
+		}
+		
+	
 // se podria abstraer a la Class Jugador
 	override method cambiarImagen(direccion){
 		if(direccion == "up"){
@@ -169,9 +180,20 @@ object agente inherits Jugador{
 	}
 	
 	method teletransportarse(){
-		const x = (mapa.bordeIzquierdo()+1).randomUpTo(mapa.bordeDerecho()-1)
-		const y = (mapa.bordeInferior()+1).randomUpTo(mapa.bordeSuperior()-1)
-		position = game.at (x, y)
+		position = aleatorio.nuevaPosicion()}
+		
+	method perderColeccionable() {
+		
+		if(objetosColeccionados.isEmpty()){
+			game.say(villano, "El pobre ya no tiene objetos que perder")
+		}
+		else {
+			const objetoPerdido =objetosColeccionados.last()
+			objetosColeccionados.remove(objetoPerdido)
+			objetoPerdido.reaparecer()
+			}
+	
+		
 	}
 }
 
@@ -181,7 +203,7 @@ object villano inherits Jugador{
 	
 	method esAgente() = false
 	
-	override method posicionPoder() = game.at(24,5)
+	override method posicionPoder() = game.at(24,2)
 	
 	override method posicionMartillo() = game.at(24,3)
 	
@@ -189,8 +211,9 @@ object villano inherits Jugador{
 		position = game.at(6,7)
 	}
 	
-	method atrapar(){
+	method interactuar(){
 		self.quedarseQuieto(3000)
+		agente.atrapado()
 		game.say(self, "Una vida menos jajaja")
 	}
 	

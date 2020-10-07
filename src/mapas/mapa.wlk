@@ -1,4 +1,5 @@
 import wollok.game.*
+import objetos.*
 
 class LimiteDelMapa{
 	method imagen()= "muro.png"
@@ -12,12 +13,14 @@ object mapa {
 	
 	method configurarMapa(){
 		self.configurarLimites()
+		
+	
 	}
 	
 	method configurarLimites(){
-		[bordeInferior..bordeSuperior].forEach{numero => game.addVisualIn(new LimiteDelMapa(), game.at(bordeIzquierdo,numero))}
-		[bordeInferior..bordeSuperior].forEach{numero => game.addVisualIn(new LimiteDelMapa(), game.at(bordeDerecho,numero))}
-		[bordeIzquierdo..bordeDerecho].forEach{numero => game.addVisualIn(new LimiteDelMapa(), game.at(numero,bordeInferior))}
-		[bordeIzquierdo..bordeDerecho].forEach{numero => game.addVisualIn(new LimiteDelMapa(), game.at(numero,bordeSuperior))}
+	
 	}
+	
+	
 }
+

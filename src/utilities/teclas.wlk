@@ -20,7 +20,7 @@ object teclas{
 		keyboard.down().onPressDo({agente.moverseA("down")})		
 		keyboard.left().onPressDo({agente.moverseA("left")})		
 		// Habilidades y Objetos Personaj 2
-		//keyboard.l().onPressDo (agente.construir())
+		keyboard.l().onPressDo ({agente.construir()})
 		keyboard.k().onPressDo ({agente.usarObjeto()})	
 		
 		}
