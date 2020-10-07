@@ -11,6 +11,7 @@ object buscandoLosArchivos {
 		teclas.configurar()
 		self.agregarObjetos()
 		self.configurarAcciones()
+		
 		game.start()
 	}
 	

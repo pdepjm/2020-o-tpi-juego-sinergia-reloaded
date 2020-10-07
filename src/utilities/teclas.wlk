@@ -11,7 +11,7 @@ object teclas{
 		keyboard.s().onPressDo({villano.moverseA("down")})
 		keyboard.a().onPressDo({villano.moverseA("left")})
 		// Habilidades y Objetos Personaj 1
-		//keyboard.w().onPressDo(villano.construir())	
+		keyboard.e().onPressDo({villano.construir()})	
 		keyboard.q().onPressDo({villano.usarObjeto()})
 		
 		// Mover Personaje 2

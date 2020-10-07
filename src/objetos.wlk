@@ -91,10 +91,17 @@ class Pinches inherits ObjetoAleatorio {
 	}
 }
 
+class Pared inherits ObjetoAleatorio {
+	
+}
+
 class Martillo inherits Objeto {
 	method construir(persona){
-		
+		const pared = new Pared(image = "muro.png", position = persona.posicionAModificar())
+		game.addVisual(pared) 
 	}
+	
+
 }
 
 

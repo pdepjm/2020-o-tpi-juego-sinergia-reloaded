@@ -29,15 +29,16 @@ class Jugador{
 	}
 	
 	method construir(){
-		
 		if (puedeConstruir) {
 			martillo.construir(self)
 			puedeConstruir = false
 			martillo.desaparecer()
 			game.schedule(15000, {self.habilitarConstruccion()})
+			
 		}
 		else {
 			game.say(self,"No puedo construir todavía")
+			
 		}
 	}
 	
