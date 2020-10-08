@@ -48,7 +48,9 @@ class Jugador{
 		puedeConstruir = true
 		martillo.aparecer()
 	}
-	
+
+// direccion -> objeto, se eliminan ifs
+
 	method nuevaPosicion(direccion){
 		if(movimientosHabilitados){
 			if (direccion == "up" && position.y()+1 < mapa.bordeSuperior()){

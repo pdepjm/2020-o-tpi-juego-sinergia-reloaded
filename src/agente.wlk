@@ -45,6 +45,7 @@ object agente inherits Jugador{
 		}
 	}	
 	
+	//  agregar contador de vidas
 	method recuperarVida(){
 		if(vidas.size() == 1){
 			vidas.add(vida2)
@@ -66,6 +67,8 @@ object agente inherits Jugador{
 		
 	
 // se podria abstraer a la Class Jugador
+// Descomponer la direccion en la superclase
+// Eliminar ifs con 1 solo metodo 
 	override method cambiarImagen(direccion){
 		if(direccion == "up"){
 			image = "Personajes/agente_back.png"
@@ -74,7 +77,7 @@ object agente inherits Jugador{
 		} else if (direccion == "down"){
 			image = "Personajes/agente_adelante.png"
 		} else if (direccion == "left"){
-			image = "Personajes/agente_izq.png"
+			image = "Personajes/agente_izq.png" 
 		}
 	}
 	
