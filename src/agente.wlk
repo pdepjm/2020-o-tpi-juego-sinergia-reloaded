@@ -8,7 +8,7 @@ import villano.*
 
 object agente inherits Jugador(name = "agente"){
 	const property contrincante = villano
-	const vidas = [vida1, vida2, vida3]
+	var cantidadDeVidas = 3
 	const objetosColeccionados = []
 	
 	method esAgente() = true
@@ -19,12 +19,10 @@ object agente inherits Jugador(name = "agente"){
 	
 	override method iniciar(){
 		super()
-		self.mostrarVidas()
+		vidas.mostrar()
 	}
 	
-	method mostrarVidas(){
-		vidas.forEach({vida => game.addVisual(vida)})
-	}
+	
 	
 	override method positionInicial(){
 		position = game.at(20,6)
@@ -35,23 +33,21 @@ object agente inherits Jugador(name = "agente"){
 	}
 	
 	method perderVida() {
-		const ultimaVida = vidas.last()
-		game.removeVisual(ultimaVida)
-		vidas.remove(ultimaVida)
-		if(vidas.isEmpty()){
+		vidas.sacar()
+		cantidadDeVidas -= 1
+		if(cantidadDeVidas == 0){
 			game.say(villano, "Yo gano hoy, suerte la proxima campeon")
 			game.schedule(3000, {game.stop()})
 		}
 	}	
 	
-	//  agregar contador de vidas
+
 	method usarObjetoRojo(){
-		if(vidas.size() == 1){
-			vidas.add(vida2)
-			game.addVisual(vida2)
-		} else if (vidas.size()==2){
-			vidas.add(vida3)
-			game.addVisual(vida3)
+		if(cantidadDeVidas < 3){
+			cantidadDeVidas+=1
+			vidas.agregar()
+		} else {
+			game.say(self, "Ya tenes todas las vidas capo")
 		}
 	}	
 	
@@ -81,5 +77,29 @@ object agente inherits Jugador(name = "agente"){
 			}
 	
 		
+	}
+}
+
+object vidas {
+	const lista = [vida1, vida2, vida3]
+	const ultimaVidaSacada = []
+	
+	method sacar(){
+		const ultimaVida = lista.last()
+		game.removeVisual(ultimaVida)
+		ultimaVidaSacada.add(ultimaVida)
+		lista.remove(ultimaVida)
+	}
+	
+	method agregar(){
+		if(!ultimaVidaSacada.isEmpty()){
+			const agregar = ultimaVidaSacada.last()
+			game.addVisual(agregar)
+			ultimaVidaSacada.remove(agregar)
+		}
+	}
+	
+	method mostrar(){
+		lista.forEach({vida => game.addVisual(vida)})
 	}
 }
