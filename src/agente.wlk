@@ -6,10 +6,9 @@ import mapas.mapa.*
 import jugadores.*
 import villano.*
 
-object agente inherits Jugador{
+object agente inherits Jugador(name = "agente"){
 	const property contrincante = villano
 	const vidas = [vida1, vida2, vida3]
-	var property image = "Personajes/agente_adelante.png"
 	const objetosColeccionados = []
 	
 	method esAgente() = true
@@ -46,7 +45,7 @@ object agente inherits Jugador{
 	}	
 	
 	//  agregar contador de vidas
-	method recuperarVida(){
+	method usarObjetoRojo(){
 		if(vidas.size() == 1){
 			vidas.add(vida2)
 			game.addVisual(vida2)
@@ -66,22 +65,8 @@ object agente inherits Jugador{
 		}
 		
 	
-// se podria abstraer a la Class Jugador
-// Descomponer la direccion en la superclase
-// Eliminar ifs con 1 solo metodo 
-	override method cambiarImagen(direccion){
-		if(direccion == "up"){
-			image = "Personajes/agente_back.png"
-		} else if (direccion == "right"){
-			image = "Personajes/agente_der.png"
-		} else if (direccion == "down"){
-			image = "Personajes/agente_adelante.png"
-		} else if (direccion == "left"){
-			image = "Personajes/agente_izq.png" 
-		}
-	}
-	
-	method teletransportarse(){
+
+	method usarObjetoVarde(){
 		position = aleatorio.nuevaPosicion()}
 		
 	method perderColeccionable() {

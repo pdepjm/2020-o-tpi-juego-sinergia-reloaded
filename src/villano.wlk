@@ -7,9 +7,8 @@ import jugadores.*
 import agente.*
 
 
-object villano inherits Jugador{
+object villano inherits Jugador(name = "villano"){
 	const property contrincante = agente
-	var property image =  "Personajes/villano_adelante.png"
 	
 	method esAgente() = false
 	
@@ -27,21 +26,17 @@ object villano inherits Jugador{
 		game.say(self, "Una vida menos jajaja")
 	}
 	
-	override method cambiarImagen(direccion){
-		if(direccion == "up"){
-			image = "Personajes/villano_back.png"
-		} else if (direccion == "right"){
-			image = "Personajes/villano_back.png"
-		} else if (direccion == "down"){
-			image = "Personajes/villano_adelante.png"
-		} else if (direccion == "left"){
-			image = "Personajes/villano_adelante.png"
+	method usarObjetoRojo(){
+		if(ultimaDireccion.posicionHabilitada(self)){
+			const bomba = new Pinches(image = "Objetos/pinches.png", position = ultimaDireccion.posicionMirada(self))
+			game.addVisual(bomba) 
+		} else {
+			game.say(villano, "No puedo poner una bomba ahi")
 		}
 	}
 	
-	method ponerPinches(){
-		const bomba = new Pinches(image = "Objetos/pinches.png", position = self.posicionAModificar())
-		game.addVisual(bomba) 
+	method usarObjetoVerde(){
+		agente.perderColeccionable()
 	}
 }
 

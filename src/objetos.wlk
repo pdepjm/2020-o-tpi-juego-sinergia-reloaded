@@ -80,12 +80,7 @@ class LiquidoVerde inherits Poder {
 	}
 	
 	override method usar(jugador){
-		if (jugador.esAgente()){
-			jugador.teletransportarse()
-		} else {
-			agente.perderColeccionable()
-			
-		}
+		jugador.usarObjetoVerde()
 		super(jugador)
 	}
 }
@@ -96,11 +91,7 @@ class LiquidoRojo inherits Poder {
 	}
 	
 	override method usar(jugador){
-		if(jugador.esAgente()){
-			jugador.recuperarVida()
-		} else {
-			jugador.ponerPinches()
-		}
+		jugador.usarObjetoRojo()
 		super(jugador)
 	}
 }

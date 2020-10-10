@@ -3,6 +3,7 @@ import wollok.game.*
 import utilities.teclas.*
 import utilities.aleatorio.*
 import mapas.mapa.*
+import utilities.direcciones.*
 
 class Jugador{
 	var property position = game.center()
@@ -10,14 +11,17 @@ class Jugador{
 	var property posicionPoder
 	var property posicionMartillo
 	var property positionInicial
-	var ultimaDireccion = "down"
+	var ultimaDireccion = down
 	var puedeConstruir = true
 	var movimientosHabilitados = true
-	
+	var name	
+	var property image
 	
 	const martillo = new Martillo(image = "Objetos/martillo.png", position = self.posicionMartillo())
 	
 	method iniciar(){
+		self.actualizarImagen()
+		game.addVisual(self)
 		self.positionInicial()
 		self.habilitarConstruccion()
 	}
@@ -49,37 +53,17 @@ class Jugador{
 		martillo.aparecer()
 	}
 
-// direccion -> objeto, se eliminan ifs
 
-	method nuevaPosicion(direccion){
-		if(movimientosHabilitados){
-			if (direccion == "up" && position.y()+1 < mapa.bordeSuperior()){
-				ultimaDireccion = "up"
-				return self.position().up(1)
-			}
-			if (direccion == "down" && position.y()-1 > mapa.bordeInferior()){
-				ultimaDireccion = "down"
-				return self.position().down(1)
-			}
-			if (direccion == "right" && position.x()+1 < mapa.bordeDerecho()){
-				ultimaDireccion = "right"
-				return self.position().right(1)
-			} 
-			if (direccion == "left" && position.x()-1 > mapa.bordeIzquierdo()){
-				ultimaDireccion = "left"
-				return self.position().left(1)
-			}
+	method moverseA(direccion){
+		ultimaDireccion = direccion
+		self.actualizarImagen()
+		if (movimientosHabilitados){
+			position = direccion.posicionMirada(self)
 		}
-		
-		return position
-
 	}
 	
-	method cambiarImagen(direccion){}
-	
-	method moverseA(direccion){
-		self.cambiarImagen(direccion)
-		position = self.nuevaPosicion(direccion)
+	method actualizarImagen(){
+		image = "Personajes/" + name + "_" + ultimaDireccion.name() +".png"
 	}
 	
 	method quedarseQuieto(milisegundos){
@@ -96,15 +80,4 @@ class Jugador{
 		objeto.atrapado()
 	}
 	
-	method posicionAModificar(){
-		if (ultimaDireccion == "up"){
-			return position.up(1)
-		} else if (ultimaDireccion == "down"){
-			return position.down(1)
-		} else if (ultimaDireccion == "right"){
-			return position.right(1)
-		}
-		return position.left(1)
-	}
-
 }

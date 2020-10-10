@@ -26,8 +26,6 @@ object configuracion{
 	}
 	
 	method agregarPersonajes(){
-		game.addVisual(villano)
-		game.addVisual(agente)
 		agente.iniciar()
 		villano.iniciar()
 	}
