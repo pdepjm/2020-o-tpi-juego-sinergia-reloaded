@@ -12,14 +12,15 @@ object paredes{
 	
 	method agregarPared(posicion){
 		posicionesOcupadas.add(posicion)
-		new Pared(image = "muro.png", position = posicion).aparecer()
+		const pared = new Pared(image = "muro.png", position = posicion)
+		pared.aparecer()
 	}
 	
 	method posicionDisponible(posicion) = !posicionesOcupadas.contains(posicion)
 	
-	/*method sacarPared(posicion){
+	method sacarPared(posicion){
 		posicionesOcupadas.remove(posicion)
-		game.removeVisual(game.getObjectsIn(posicion))
-	}*/
+		// No se como sacarla del juego a la pared
+		// game.getObjectsIn(posicion).desaparecer()
+	}
 }
-

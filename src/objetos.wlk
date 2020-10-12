@@ -122,7 +122,6 @@ class Martillo inherits Objeto {
 	}
 }
 
-
 const vida1 = new Objeto(image = "Objetos/vida.png", position = game.at(0,13))
 
 const vida2 = new Objeto(image = "Objetos/vida.png", position = game.at(0,12))
