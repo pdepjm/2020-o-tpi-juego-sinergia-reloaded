@@ -19,8 +19,9 @@ object paredes{
 	method posicionDisponible(posicion) = !posicionesOcupadas.contains(posicion)
 	
 	method sacarPared(posicion){
+		
 		posicionesOcupadas.remove(posicion)
-		// No se como sacarla del juego a la pared
-		// game.getObjectsIn(posicion).desaparecer()
+		posicion.clear()
+	
 	}
 }
