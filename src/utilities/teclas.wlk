@@ -9,12 +9,12 @@ object teclas{
 	method configurar(){
 		
 		// Mover Personaje 1
-		keyboard.e().onPressDo({villano.moverseA(up)})
-		keyboard.f().onPressDo({villano.moverseA(right)})
-		keyboard.d().onPressDo({villano.moverseA(down)})
-		keyboard.s().onPressDo({villano.moverseA(left)})
+		keyboard.w().onPressDo({villano.moverseA(up)})
+		keyboard.d().onPressDo({villano.moverseA(right)})
+		keyboard.s().onPressDo({villano.moverseA(down)})
+		keyboard.a().onPressDo({villano.moverseA(left)})
 		// Habilidades y Objetos Personaj 1
-		keyboard.w().onPressDo({villano.modificarMapa()})	
+		keyboard.e().onPressDo({villano.modificarMapa()})	
 		keyboard.q().onPressDo({villano.usarObjeto()})
 		
 		// Mover Personaje 2
