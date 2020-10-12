@@ -11,7 +11,7 @@ class Jugador{
 	var property posicionPoder
 	var property posicionMartillo
 	var property positionInicial
-	var ultimaDireccion = down
+	var property ultimaDireccion = down
 	var puedeConstruir = true
 	var movimientosHabilitados = true
 	var name	
@@ -34,17 +34,15 @@ class Jugador{
 		else {game.say(self,"No tengo ningún objeto")}
 	}
 	
-	method construir(){
-		if (puedeConstruir) {
-			martillo.construir(self)
+	method modificarMapa(){
+		if (puedeConstruir && ultimaDireccion.dentroDeLosLimites(ultimaDireccion.proximo(self))) {
+			martillo.modificarMapa(self)
 			puedeConstruir = false
 			martillo.desaparecer()
-			game.schedule(15000, {self.habilitarConstruccion()})
-			
+			game.schedule(10000, {self.habilitarConstruccion()})
 		}
 		else {
-			game.say(self,"No puedo construir todavía")
-			
+			game.say(self,"No puedo construir")
 		}
 	}
 	

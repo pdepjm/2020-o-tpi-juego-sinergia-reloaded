@@ -14,7 +14,7 @@ object teclas{
 		keyboard.d().onPressDo({villano.moverseA(down)})
 		keyboard.s().onPressDo({villano.moverseA(left)})
 		// Habilidades y Objetos Personaj 1
-		//keyboard.w().onPressDo({villano.construir()})	
+		keyboard.w().onPressDo({villano.modificarMapa()})	
 		keyboard.q().onPressDo({villano.usarObjeto()})
 		
 		// Mover Personaje 2
@@ -23,7 +23,7 @@ object teclas{
 		keyboard.down().onPressDo({agente.moverseA(down)})		
 		keyboard.left().onPressDo({agente.moverseA(left)})		
 		// Habilidades y Objetos Personaj 2
-		//keyboard.l().onPressDo ({agente.construir()})
+		keyboard.l().onPressDo ({agente.modificarMapa()})
 		keyboard.k().onPressDo ({agente.usarObjeto()})	
 		
 		}

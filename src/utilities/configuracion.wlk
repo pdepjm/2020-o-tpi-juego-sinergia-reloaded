@@ -5,6 +5,7 @@ import utilities.teclas.*
 import mapas.mapa.*
 import villano.*
 import agente.*
+import paredes.*
 
 object configuracion{
 	method iniciar(){
@@ -45,5 +46,6 @@ object configuracion{
 		game.onCollideDo(objetoRojo, {personaje => personaje.guardarObjeto(objetoRojo)})
 		game.onCollideDo(objetoVerde, {personaje => personaje.guardarObjeto(objetoVerde)})
 		game.onCollideDo(agente, {objetoEncontrado => objetoEncontrado.interactuar()})
+		//game.onCollideDo(Pared, {objeto => objeto.aparecer()})
 	}
 }

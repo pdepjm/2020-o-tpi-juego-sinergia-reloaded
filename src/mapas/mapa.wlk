@@ -1,5 +1,4 @@
 import wollok.game.*
-import objetos.*
 
 class LimiteDelMapa{
 	var property image = "muro.png"
@@ -22,12 +21,8 @@ object mapa {
 		(bordeInferior..bordeSuperior).forEach{numero => game.addVisualIn(new LimiteDelMapa(), game.at(bordeDerecho,numero))}
 		(bordeIzquierdo..bordeDerecho).forEach{numero => game.addVisualIn(new LimiteDelMapa(), game.at(numero,bordeInferior))}
 		(bordeIzquierdo..bordeDerecho).forEach{numero => game.addVisualIn(new LimiteDelMapa(), game.at(numero,bordeSuperior))}
-		
-		
-		
-		
+
 	}
-	
 	
 }
 

@@ -1,61 +1,50 @@
 import mapas.mapa.*
 import jugadores.*
+import paredes.*
 
 class Direccion {
-	method posicionMirada (jugador){
-		var nuevaPosicion = self.nuevaPosicion(jugador)
-		return nuevaPosicion
-	}
-	method nuevaPosicion(jugador) {
-		return jugador.position()
-	}
-		
-}
-
-object up inherits Direccion{
-	const property name = "back"
-	override method nuevaPosicion(jugador){
-		if(self.posicionHabilitada(jugador))
-		 	return jugador.position().up(1);
-
-		return jugador.position()
-	}
-	method posicionHabilitada(jugador) = jugador.position().y()+1 < mapa.bordeSuperior()
-}
-
-object down inherits Direccion{
-	const property name = "adelante"
-	override method nuevaPosicion(jugador){
-		 if(self.posicionHabilitada(jugador)){
-		 	return jugador.position().down(1);
+	const property name
+	method posicionHabilitada(posicion) = self.dentroDeLosLimites(posicion) && paredes.posicionDisponible(posicion)
+	
+	method posicionMirada(jugador){
+		 const nuevaDireccion = self.proximo(jugador)
+		 if(self.posicionHabilitada(nuevaDireccion)){
+		 	return nuevaDireccion
 		 }
-		 return jugador.position();
+		 return jugador.position()
 	}
-	method posicionHabilitada(jugador) = jugador.position().y()-1 > mapa.bordeInferior()
+	
+	method dentroDeLosLimites(direccion) = true
+	method proximo(jugador) = jugador.position()
 	
 }
 
-object left inherits Direccion{
-	const property name = "izq"
-	override method nuevaPosicion(jugador){
-		 if(self.posicionHabilitada(jugador)){
-		 	return jugador.position().left(1);
-		 }
-		 return jugador.position();
-	}
-	method posicionHabilitada(jugador) = jugador.position().x()-1 > mapa.bordeIzquierdo()
+object up inherits Direccion(name = "back"){
+
+	override method proximo(jugador) = jugador.position().up(1)
+	
+	override method dentroDeLosLimites(posicion) = posicion.y() < mapa.bordeSuperior()
+}
+
+object down inherits Direccion(name = "adelante"){
+
+	override method proximo(jugador) = jugador.position().down(1)
+	
+	override method dentroDeLosLimites(posicion) = posicion.y() > mapa.bordeInferior()
+}
+
+object left inherits Direccion (name = "izq"){
+
+	override method proximo(jugador) = jugador.position().left(1)
+	
+	override method dentroDeLosLimites(posicion) = posicion.x() > mapa.bordeIzquierdo()
 	
 }
 
-object right inherits Direccion{
-	const property name = "der"
-	override method nuevaPosicion(jugador){
-		 if(self.posicionHabilitada(jugador)){
-		 	return jugador.position().right(1);
-		 }
-		 return jugador.position();
-	}
+object right inherits Direccion (name = "der"){
 	
-	method posicionHabilitada(jugador) = jugador.position().x()+1 < mapa.bordeDerecho()
+	override method proximo(jugador) = jugador.position().right(1)
+	
+	override method dentroDeLosLimites(posicion) = posicion.x() < mapa.bordeDerecho()
 	
 }

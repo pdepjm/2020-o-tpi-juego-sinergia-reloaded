@@ -28,7 +28,7 @@ object villano inherits Jugador(name = "villano"){
 	
 	method usarObjetoRojo(){
 		if(ultimaDireccion.posicionHabilitada(self)){
-			const bomba = new Pinches(image = "Objetos/pinches.png", position = ultimaDireccion.posicionMirada(self))
+			const bomba = new Pinches(image = "Objetos/pinches.png", position = ultimaDireccion.proximo(self))
 			game.addVisual(bomba) 
 		} else {
 			game.say(villano, "No puedo poner una bomba ahi")

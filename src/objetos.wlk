@@ -4,10 +4,13 @@ import mapas.mapa.*
 import utilities.aleatorio.*
 import villano.*
 import agente.*
+import paredes.*
 
 class Objeto {
 	var property image 
 	var property position
+	
+	method guardarObjeto(objeto){}
 	
 	method aparecer(){
 		game.addVisual(self)
@@ -45,6 +48,10 @@ class ObjetoColeccionable inherits ObjetoAleatorio{
 		self.desaparecer()
 		self.aparecer()
 	}
+	
+	override method guardarObjeto(objeto){
+		objeto.aparecer()
+	}
 }
 
 class Poder inherits ObjetoAleatorio{
@@ -61,7 +68,7 @@ class Poder inherits ObjetoAleatorio{
 	}	
 }
 
-class LiquidoAzul inherits Poder {
+class LiquidoAzul inherits Poder{
 	
 	override method crearReplica(direccion){
 		return new LiquidoAzul(image="Objetos/objeto_azul.png", position = direccion)
@@ -103,17 +110,16 @@ class Pinches inherits Objeto {
 	}
 }
 
-class Pared inherits Objeto {
-	
-}
-
 class Martillo inherits Objeto {
-	method construir(persona){
-		const pared = new Pared(image = "muro.png", position = persona.posicionAModificar())
-		game.addVisual(pared) 
-	}
 	
-
+	method modificarMapa(persona){
+		const direccion = persona.ultimaDireccion().proximo(persona)
+		if(paredes.posicionDisponible(direccion)){
+			paredes.agregarPared(direccion)
+		} else {
+			paredes.sacarPared(direccion)
+		}
+	}
 }
 
 
