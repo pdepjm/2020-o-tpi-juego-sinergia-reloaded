@@ -1,14 +1,14 @@
 import wollok.game.*
 
 class LimiteDelMapa{
-	var property image = "muro.png"
+	var property image = "Objetos/pared1.png"
 }
 
 object mapa {
-	const property bordeSuperior = 13
+	const property bordeSuperior = 14
 	const property bordeInferior = 0
-	const property bordeDerecho = 23
-	const property bordeIzquierdo = 1	
+	const property bordeDerecho = 24
+	const property bordeIzquierdo = 0	
 	
 	method configurarMapa(){
 		self.configurarLimites()

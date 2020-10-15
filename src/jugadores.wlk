@@ -1,21 +1,23 @@
 import objetos.*
 import wollok.game.*
 import utilities.teclas.*
-import utilities.aleatorio.*
 import mapas.mapa.*
+import paredes.*
 import utilities.direcciones.*
+import utilities.aleatorio.*
 
 class Jugador{
 	var property position = game.center()
-	var objetoEncontrado = null
 	var property posicionPoder
 	var property posicionMartillo
 	var property positionInicial
 	var property ultimaDireccion = down
+	var property image
+	var objetoEncontrado = null
 	var puedeConstruir = true
 	var movimientosHabilitados = true
 	var name	
-	var property image
+	
 	
 	const martillo = new Martillo(image = "Objetos/martillo.png", position = self.posicionMartillo())
 	
@@ -35,14 +37,14 @@ class Jugador{
 	}
 	
 	method modificarMapa(){
-		if (puedeConstruir && ultimaDireccion.dentroDeLosLimites(ultimaDireccion.proximo(self))) {
+		if (puedeConstruir && ultimaDireccion.dentroDeLosLimites(ultimaDireccion.proximo(self)) && laberinto.celda_disponible(ultimaDireccion.proximo(self))) {
 			martillo.modificarMapa(self)
 			puedeConstruir = false
 			martillo.desaparecer()
-			game.schedule(10000, {self.habilitarConstruccion()})
+			game.schedule(5000, {self.habilitarConstruccion()})
 		}
 		else {
-			game.say(self,"No puedo construir")
+			game.say(self, "WARNING: NO se puede destruir")
 		}
 	}
 	

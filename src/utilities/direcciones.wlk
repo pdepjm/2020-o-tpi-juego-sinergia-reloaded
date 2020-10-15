@@ -19,21 +19,21 @@ class Direccion {
 	
 }
 
-object up inherits Direccion(name = "back"){
+object up inherits Direccion(name = "arriba"){
 
 	override method proximo(jugador) = jugador.position().up(1)
 	
 	override method dentroDeLosLimites(posicion) = posicion.y() < mapa.bordeSuperior()
 }
 
-object down inherits Direccion(name = "adelante"){
+object down inherits Direccion(name = "abajo"){
 
 	override method proximo(jugador) = jugador.position().down(1)
 	
 	override method dentroDeLosLimites(posicion) = posicion.y() > mapa.bordeInferior()
 }
 
-object left inherits Direccion (name = "izq"){
+object left inherits Direccion (name = "izquierda"){
 
 	override method proximo(jugador) = jugador.position().left(1)
 	
@@ -41,7 +41,7 @@ object left inherits Direccion (name = "izq"){
 	
 }
 
-object right inherits Direccion (name = "der"){
+object right inherits Direccion (name = "derecha"){
 	
 	override method proximo(jugador) = jugador.position().right(1)
 	

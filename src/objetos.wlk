@@ -1,14 +1,17 @@
-import jugadores.*
 import wollok.game.*
+import jugadores.*
 import mapas.mapa.*
-import utilities.aleatorio.*
 import villano.*
 import agente.*
 import paredes.*
+import utilities.aleatorio.*
+import utilities.direcciones.*
+import utilities.pantalla.*
+
 
 class Objeto {
-	var property image 
-	var property position
+	var property image = "Objetos/objeto_azul.png"
+	var property position = up
 	
 	method guardarObjeto(objeto){}
 	
@@ -83,7 +86,7 @@ class LiquidoAzul inherits Poder{
 class LiquidoVerde inherits Poder {
 
 	override method crearReplica(direccion){
-		return new LiquidoVerde(image="Objetos/objeto_amarillo.png", position = direccion)
+		return new LiquidoVerde(image="Objetos/objeto_verde.png", position = direccion)
 	}
 	
 	override method usar(jugador){
@@ -122,19 +125,95 @@ class Martillo inherits Objeto {
 	}
 }
 
-const vida1 = new Objeto(image = "Objetos/vida.png", position = game.at(0,13))
+class Reloj inherits Objeto {
+	var limite_indice
+	var indice
+	var property segundos
+	var property clock_posc
+	const clock = ["cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve"]
+	
+	method accionar(){
+		clock_posc.aparecer()
+		game.onTick(segundos, "reloj_posc",{ self.modificar() })
+	}
+	
+	method modificar(){
+		clock_posc.desaparecer()
+		self.actualizarImagen()
+		clock_posc.aparecer()
+	}
+	
+	method actualizarImagen(){
+		const new_image = "Objetos/" + clock.get(indice) + ".png"
+		clock_posc.image(new_image)
+		self.set_indice()
+	}
+	
+	method set_indice(){
+		if(indice == 0)
+			indice = limite_indice
+		else
+			indice--
+	}
+	
+	method stop_time(){
+		game.removeTickEvent("reloj_posc")
+		clock_posc.desaparecer()
+		clock_posc.image("Objetos/cero.png")
+		clock_posc.aparecer()
+	}
 
-const vida2 = new Objeto(image = "Objetos/vida.png", position = game.at(0,12))
+}
 
-const vida3 = new Objeto(image = "Objetos/vida.png", position = game.at(0,11))
 
-const objetoAzul = new LiquidoAzul(image="Objetos/objeto_azul.png", position = game.at(14,5))
+/////////////////////////////
+//--------- VIDAS ---------//
+/////////////////////////////
+const vida1 = new Objeto(image = "Objetos/vida.png", position = game.at(13,15))
+const vida2 = new Objeto(image = "Objetos/vida.png", position = game.at(14,15))
+const vida3 = new Objeto(image = "Objetos/vida.png", position = game.at(15,15))
 
-const objetoVerde = new LiquidoVerde(image="Objetos/objeto_amarillo.png", position = game.at(4,10))
+object vidas {
+	const lista = [vida1, vida2, vida3]
+	const ultimaVidaSacada = []
+	
+	method sacar(){
+		const ultimaVida = lista.last()
+		game.removeVisual(ultimaVida)
+		ultimaVidaSacada.add(ultimaVida)
+		lista.remove(ultimaVida)
+	}
+	
+	method agregar(){
+		if(!ultimaVidaSacada.isEmpty()){
+			const agregar = ultimaVidaSacada.last()
+			game.addVisual(agregar)
+			ultimaVidaSacada.remove(agregar)
+		}
+	}
+	
+	method mostrar(){
+		lista.forEach({vida => game.addVisual(vida)})
+	}
+}
 
+
+/////////////////////////////
+//---- OBJETOS DE PODER ---//
+/////////////////////////////
+const objetoAzul = new LiquidoAzul(image="Objetos/objeto_azul.png", position = game.at(16,5))
+const objetoVerde = new LiquidoVerde(image="Objetos/objeto_verde.png", position = game.at(4,10))
 const objetoRojo = new LiquidoRojo(image="Objetos/objeto_rojo.png", position = game.at(10,9))
 
-const objetoColeccionable1 = new ObjetoColeccionable(image="chili.png", position=game.at(10,8), posicionDestino=game.at(0,5))
-const objetoColeccionable2 = new ObjetoColeccionable(image="orange.png", position=game.at(10,8), posicionDestino=game.at(0,6))
-const objetoColeccionable3 = new ObjetoColeccionable(image="Strawberry.png", position=game.at(10,8), posicionDestino=game.at(0,7))
-const objetoColeccionable4 = new ObjetoColeccionable(image="watermelon.png", position=game.at(10,8), posicionDestino=game.at(0,8))
+
+/////////////////////////////
+//- OBJETOS COLECCIONABLES-//
+/////////////////////////////
+const objetoColeccionable1 = new ObjetoColeccionable(image="Objetos/potion.png", position= game.at(10,8), posicionDestino= game.at(17,15))
+const objetoColeccionable2 = new ObjetoColeccionable(image="Objetos/dragon.png", position= game.at(10,8), posicionDestino= game.at(18,15))
+const objetoColeccionable3 = new ObjetoColeccionable(image="Objetos/papiro.png", position= game.at(10,8), posicionDestino= game.at(19,15))
+const objetoColeccionable4 = new ObjetoColeccionable(image="Objetos/skull.png", position= game.at(10,8), posicionDestino= game.at(20,15))
+
+
+
+

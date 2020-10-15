@@ -13,20 +13,19 @@ object agente inherits Jugador(name = "agente"){
 	
 	method esAgente() = true
 	
-	override method posicionPoder() = game.at(0,2)
+	override method posicionPoder() = game.at(23,15)
 	
-	override method posicionMartillo() = game.at(0,3)
+	override method posicionMartillo() = game.at(22,15)
+	
+	override method positionInicial(){
+		position = game.at(20,6)
+	}
 	
 	override method iniciar(){
 		super()
 		vidas.mostrar()
 	}
 	
-	
-	
-	override method positionInicial(){
-		position = game.at(20,6)
-	}
 	
 	method atrapado() {
 		self.perderVida()
@@ -40,8 +39,11 @@ object agente inherits Jugador(name = "agente"){
 			game.schedule(3000, {game.stop()})
 		}
 	}	
-	
 
+		
+	/////////////////////////////
+	//- OBJETOS COLECCIONABLES-//
+	/////////////////////////////	
 	method usarObjetoRojo(){
 		if(cantidadDeVidas < 3){
 			cantidadDeVidas+=1
@@ -49,20 +51,9 @@ object agente inherits Jugador(name = "agente"){
 		} else {
 			game.say(self, "Ya tenes todas las vidas capo")
 		}
-	}	
-	
-	
-	method guardarColeccionable(coleccionable){ 
-		objetosColeccionados.add(coleccionable)
-		if(objetosColeccionados.size() == 4){
-			game.say(self, "Yo gano hoy, suerte la proxima campeon")
-			game.schedule(3000, {game.stop()})
-			}
-		}
-		
-	
+	}
 
-	method usarObjetoVarde(){
+	method usarObjetoVerde(){
 		position = aleatorio.nuevaPosicion()}
 		
 	method perderColeccionable() {
@@ -74,32 +65,17 @@ object agente inherits Jugador(name = "agente"){
 			const objetoPerdido =objetosColeccionados.last()
 			objetosColeccionados.remove(objetoPerdido)
 			objetoPerdido.reaparecer()
-			}
-	
-		
+		}		
 	}
+	
+	method guardarColeccionable(coleccionable){ 
+		objetosColeccionados.add(coleccionable)
+		if(objetosColeccionados.size() == 4){
+			game.say(self, "Yo gano hoy, suerte la proxima campeon")
+			game.schedule(3000, {game.stop()})
+			}
+		}
 }
 
-object vidas {
-	const lista = [vida1, vida2, vida3]
-	const ultimaVidaSacada = []
-	
-	method sacar(){
-		const ultimaVida = lista.last()
-		game.removeVisual(ultimaVida)
-		ultimaVidaSacada.add(ultimaVida)
-		lista.remove(ultimaVida)
-	}
-	
-	method agregar(){
-		if(!ultimaVidaSacada.isEmpty()){
-			const agregar = ultimaVidaSacada.last()
-			game.addVisual(agregar)
-			ultimaVidaSacada.remove(agregar)
-		}
-	}
-	
-	method mostrar(){
-		lista.forEach({vida => game.addVisual(vida)})
-	}
-}
+
+
