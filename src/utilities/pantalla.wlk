@@ -53,14 +53,12 @@ object my_clock{
 	
 	method iniciar(){
 		dos_puntos.aparecer()
-		posc1.accionar()
-		posc3.accionar()
-		posc4.accionar()
-		//init_clock.forEach({objeto => objeto.accionar()})
+		self.crear_reloj()	
+		init_clock.forEach({objeto => objeto.accionar()})
 	}
 	
 	method detener(){
-		self.crear_reloj()	
+		
 		init_clock.forEach({objeto => objeto.stop_time()})
 	}
 }
