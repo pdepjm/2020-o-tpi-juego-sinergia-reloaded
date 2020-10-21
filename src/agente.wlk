@@ -8,8 +8,8 @@ import villano.*
 
 object agente inherits Jugador(name = "agente"){
 	const property contrincante = villano
-	var cantidadDeVidas = 3
-	const objetosColeccionados = []
+	var property cantidadDeVidas = 3
+	const property objetosColeccionados = []
 	
 	method esAgente() = true
 	

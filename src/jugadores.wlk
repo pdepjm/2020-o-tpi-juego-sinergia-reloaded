@@ -18,8 +18,9 @@ class Jugador{
 	var movimientosHabilitados = true
 	var name	
 	
-	
 	const martillo = new Martillo(image = "Objetos/martillo.png", position = self.posicionMartillo())
+	
+	method position(nuevaPosition){ position = nuevaPosition}
 	
 	method iniciar(){
 		self.actualizarImagen()
@@ -78,6 +79,7 @@ class Jugador{
 		objetoEncontrado = objeto.crearReplica(self.posicionPoder())
 		game.addVisual(objetoEncontrado)
 		objeto.atrapado()
+		return objetoEncontrado
 	}
 	
 }
