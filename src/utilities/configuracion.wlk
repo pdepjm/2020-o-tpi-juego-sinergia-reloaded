@@ -7,6 +7,7 @@ import mapas.mapa.*
 import paredes.*
 import utilities.teclas.*
 import utilities.pantalla.*
+import utilities.aleatorio.*
 
 object configuracion{
 	method iniciar(){
@@ -34,7 +35,6 @@ object configuracion{
 	}
 	
 	method agregarObjetos(){
-		laberinto.boceto()
 		laberinto.mostrar()
 		objetoAzul.aparecer()
 		objetoVerde.aparecer()

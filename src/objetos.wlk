@@ -182,6 +182,7 @@ object vidas {
 		game.removeVisual(ultimaVida)
 		ultimaVidaSacada.add(ultimaVida)
 		lista.remove(ultimaVida)
+		game.say(icono_agente, "Perdiste una vida")
 	}
 	
 	method agregar(){
