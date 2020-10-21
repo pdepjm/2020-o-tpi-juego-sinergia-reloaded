@@ -15,7 +15,7 @@ class Jugador{
 	var property image
 	var objetoEncontrado = null
 	var puedeConstruir = true
-	var movimientosHabilitados = true
+	var property movimientosHabilitados = true
 	var name	
 	
 	

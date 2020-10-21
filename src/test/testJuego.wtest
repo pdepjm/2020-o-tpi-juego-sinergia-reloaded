@@ -1,0 +1,55 @@
+import wollok.game.*
+import agente.*
+import villano.*
+import objetos.*
+import paredes.*
+import utilities.pantalla.*
+import mapas.mapa.*
+
+describe "Juego" {
+	fixture {
+		game.clear()
+		mapa.configurarMapa()
+		laberinto.mostrar()
+		objetoAzul.aparecer()
+		objetoVerde.aparecer()
+		objetoRojo.aparecer()
+		objetoColeccionable1.aparecer()
+		objetoColeccionable2.aparecer()
+		objetoColeccionable3.aparecer()
+		objetoColeccionable4.aparecer()
+		pantalla.aparecer()
+		icono_agente.aparecer()
+		icono_villano.aparecer()
+		agente.iniciar()
+		villano.iniciar()
+	}
+	
+	test "El villano atrapa al agente" {
+		villano.interactuar()
+		assert.equals(2, agente.cantidadDeVidas())
+	}
+	
+	test "El villano usa el objeto verde" {
+		agente.guardarColeccionable(objetoColeccionable1)
+		villano.usarObjetoVerde()
+		assert.equals(0, agente.objetosColeccionados().size())
+	}
+	
+	test "El villano usa el objeto azul" {
+		villano.guardarObjeto(objetoAzul)
+		villano.usarObjeto()
+		assert.notThat(agente.movimientosHabilitados())
+	}
+	
+	test "El agente usa el objeto Rojo despues de perder dos vidas chocando contra pinches" {
+		const pinches = new Pinches(image = "Objetos/pinches.png", position = game.at(2,6))
+		const pinches2 = new Pinches(image = "Objetos/pinches.png", position = game.at(10,6))
+		game.addVisual(pinches)
+		game.addVisual(pinches2)
+		pinches.interactuar()
+		pinches2.interactuar()
+		agente.usarObjetoRojo()
+		assert.equals(2, agente.cantidadDeVidas())
+	}
+}

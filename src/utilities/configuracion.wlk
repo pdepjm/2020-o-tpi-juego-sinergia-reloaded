@@ -16,7 +16,6 @@ object configuracion{
 		self.agregarObjetos()
 		self.agregarPersonajes()
 		self.configurarAcciones()
-		mapa.configurarMapa()
 		game.start()
 		
 	}
