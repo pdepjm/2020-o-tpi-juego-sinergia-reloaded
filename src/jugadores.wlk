@@ -80,4 +80,5 @@ class Jugador{
 		objeto.atrapado()
 	}
 	
+	
 }

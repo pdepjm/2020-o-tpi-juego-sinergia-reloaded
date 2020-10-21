@@ -1,10 +1,11 @@
-import objetos.*
 import wollok.game.*
-import utilities.teclas.*
-import utilities.aleatorio.*
+import objetos.*
 import mapas.mapa.*
 import jugadores.*
 import villano.*
+import utilities.teclas.*
+import utilities.aleatorio.*
+import utilities.pantalla.*
 
 object agente inherits Jugador(name = "agente"){
 	const property contrincante = villano

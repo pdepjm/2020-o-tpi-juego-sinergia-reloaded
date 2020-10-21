@@ -28,7 +28,6 @@ object pantalla {
 		elementos.add(new Objeto(image = "Objetos/celdax8_negra.png", position = game.at(3,15)))
 		elementos.add(new Objeto(image = "Objetos/celdax11_negra.png", position = game.at(13,15)))
 		elementos.add(new Objeto(image = "Objetos/celda2x2_negra.png", position = game.at(11,15)))
-		
 	}
 	
 	method aparecer(){
@@ -58,7 +57,6 @@ object my_clock{
 	}
 	
 	method detener(){
-		
 		init_clock.forEach({objeto => objeto.stop_time()})
 	}
 }
