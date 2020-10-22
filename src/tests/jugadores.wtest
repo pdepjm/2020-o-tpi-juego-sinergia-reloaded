@@ -92,6 +92,7 @@ describe "Interacción villano-agente"
 		game.addVisual(vida2)
 		game.addVisual(vida3)
 		game.addVisual(villano)
+		game.addVisual(agente)
 	}
 	
 	test "Cuando el villano se encuentra con el agente, le saca una vida"

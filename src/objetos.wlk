@@ -174,7 +174,7 @@ object vida2 inherits Objeto(image = "Objetos/vida.png", position = game.at(14,1
 object vida3 inherits Objeto(image = "Objetos/vida.png", position = game.at(15,15)){}
 
 object vidas {
-	const lista = [vida1, vida2, vida3]
+	const lista = [vida1, vida2, vida3] // lista de posiciones
 	const ultimaVidaSacada = []
 	
 	method sacar(){
@@ -182,7 +182,7 @@ object vidas {
 		game.removeVisual(ultimaVida)
 		ultimaVidaSacada.add(ultimaVida)
 		lista.remove(ultimaVida)
-		game.say(icono_agente, "Perdiste una vida")
+		// game.say(icono_agente, "Perdiste una vida")
 	}
 	
 	method agregar(){
