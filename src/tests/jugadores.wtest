@@ -88,9 +88,7 @@ describe "Interacción villano-agente"
 	 
 	fixture
 	{
-		game.addVisual(vida1)
-		game.addVisual(vida2)
-		game.addVisual(vida3)
+		vidas.mostrar()
 		game.addVisual(villano)
 		game.addVisual(agente)
 	}

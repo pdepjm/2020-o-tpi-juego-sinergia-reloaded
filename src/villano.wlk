@@ -19,7 +19,7 @@ object villano inherits Jugador(name = "villano"){
 	override method posicionMartillo() = game.at(3,15)
 	
 	override method positionInicial(){
-		position = game.at(6,7)
+		self.cambiarPosicion(game.at(6,7))
 	}
 	
 	method interactuar(){
@@ -29,8 +29,8 @@ object villano inherits Jugador(name = "villano"){
 	}
 	
 	method usarObjetoRojo(){
-		const direccion = ultimaDireccion.proximo(self)
-		if(ultimaDireccion.posicionHabilitada(direccion)){
+		const direccion = self.ultimaDireccion().proximo(self)
+		if(game.getObjectsIn(direccion).isEmpty()){
 			const bomba = new Pinches(image = "Objetos/pinches.png", position = direccion)
 			game.addVisual(bomba) 
 			

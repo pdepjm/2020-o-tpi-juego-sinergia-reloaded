@@ -82,5 +82,7 @@ class Jugador{
 		return objetoEncontrado
 	}
 	
-	
+	method cambiarPosicion(nueva){
+		position = nueva
+	}
 }

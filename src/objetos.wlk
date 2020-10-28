@@ -169,11 +169,11 @@ class Reloj inherits Objeto {
 /////////////////////////////
 //--------- VIDAS ---------//
 /////////////////////////////
-object vida1 inherits Objeto(image = "Objetos/vida.png", position = game.at(13,15)){}
-object vida2 inherits Objeto(image = "Objetos/vida.png", position = game.at(14,15)){}
-object vida3 inherits Objeto(image = "Objetos/vida.png", position = game.at(15,15)){}
 
 object vidas {
+	const vida1 = new Objeto(image = "Objetos/vida.png", position = game.at(13,15))
+	const vida2 = new Objeto(image = "Objetos/vida.png", position = game.at(14,15))
+	const vida3 = new Objeto(image = "Objetos/vida.png", position = game.at(15,15))
 	const lista = [vida1, vida2, vida3] // lista de posiciones
 	const ultimaVidaSacada = []
 	

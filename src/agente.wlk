@@ -19,7 +19,7 @@ object agente inherits Jugador(name = "agente"){
 	override method posicionMartillo() = game.at(22,15)
 	
 	override method positionInicial(){
-		position = game.at(20,6)
+		self.cambiarPosicion(game.at(20,6))
 	}
 	
 	override method iniciar(){
@@ -34,6 +34,7 @@ object agente inherits Jugador(name = "agente"){
 	
 	method perderVida() {
 		vidas.sacar()
+		game.say(self, "Auch")
 		cantidadDeVidas -= 1
 		if(cantidadDeVidas == 0){
 			game.say(villano, "Yo gano hoy, suerte la proxima campeon")
@@ -55,7 +56,8 @@ object agente inherits Jugador(name = "agente"){
 	}
 
 	method usarObjetoVerde(){
-		position = aleatorio.nuevaPosicion()}
+		self.cambiarPosicion(aleatorio.nuevaPosicion())
+	}
 		
 	method perderColeccionable() {
 		
@@ -74,8 +76,8 @@ object agente inherits Jugador(name = "agente"){
 		if(objetosColeccionados.size() == 4){
 			game.say(self, "Yo gano hoy, suerte la proxima campeon")
 			game.schedule(3000, {game.stop()})
-			}
 		}
+	}
 }
 
 
