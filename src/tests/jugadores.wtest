@@ -1,0 +1,108 @@
+import wollok.game.*
+import jugadores.*
+import utilities.direcciones.*
+import agente.*
+import villano.*
+import objetos.*
+
+describe "Posiciones iniciales de los jugadores"
+{
+	test "El agente se crea en su determinada posicion inicial (20,6)" 
+	{
+		agente.positionInicial()
+		assert.equals(game.at(20,6), agente.position())
+	}
+	
+	test "El villano se crea en su determinada posicion inicial (6,7)"
+	{
+		villano.positionInicial()
+		assert.equals(game.at(6,7), villano.position())
+	}
+}
+
+describe "Movimiento de un jugador"
+{	
+	fixture
+	{
+		villano.positionInicial() 	// (6,7)
+	}
+	
+	test "Al moverse hacia arriba el jugador aumenta en 1 la posicion en 'y' y actualiza su direccion e imagen"
+	{
+		villano.moverseA(up)
+		
+		assert.equals(game.at(6,8), villano.position())
+		assert.equals(up, villano.ultimaDireccion())
+		assert.equals("Personajes/villano_arriba.png", villano.image())
+	}
+	
+	test "Al moverse hacia abajo el jugador disminuye en 1 la posicion en 'y' y actualiza su direccion e imagen"
+	{
+		villano.moverseA(down)
+		
+		assert.equals(game.at(6,6), villano.position())
+		assert.equals(down, villano.ultimaDireccion())
+		assert.equals("Personajes/villano_abajo.png", villano.image())
+	}
+	
+	test "Al moverse hacia la derecha el jugador aumenta en 1 la posicion en 'x' y actualiza su direccion e imagen"
+	{
+		villano.moverseA(right)
+		
+		assert.equals(game.at(7,7), villano.position())
+		assert.equals(right, villano.ultimaDireccion())
+		assert.equals("Personajes/villano_derecha.png", villano.image())
+	}
+	
+	test "Al moverse hacia la izquierda el jugador disminuye en 1 la posicion en 'x' y actualiza su direccion e imagen"
+	{
+		villano.moverseA(left)
+		
+		assert.equals(game.at(5,7), villano.position())
+		assert.equals(left, villano.ultimaDireccion())
+		assert.equals("Personajes/villano_izquierda.png", villano.image())
+	}
+	
+	test "El jugador no puede moverse hacia las paredes"
+	{
+		villano.moverseA(up)		// (6,8)
+		villano.moverseA(right)		// La pared bloquea el movimiento, se queda en (6,8)
+		
+		assert.equals(game.at(6,8), villano.position())
+	}
+	
+	
+	test "Si no es posible moverse a esa casilla, el jugador igualmente actualiza su direccion e imagen"
+	{
+		villano.moverseA(up)
+		villano.moverseA(right)
+		
+		assert.equals(right, villano.ultimaDireccion())
+		assert.equals("Personajes/villano_derecha.png", villano.image())
+	}
+} 
+
+
+describe "Interacción villano-agente"
+{
+	 
+	fixture
+	{
+		game.addVisual(vida1)
+		game.addVisual(vida2)
+		game.addVisual(vida3)
+		game.addVisual(villano)
+		game.addVisual(agente)
+	}
+	
+	test "Cuando el villano se encuentra con el agente, le saca una vida"
+	{
+		villano.interactuar()
+		assert.equals(2, agente.cantidadDeVidas())
+	}
+}
+
+
+
+
+

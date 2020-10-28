@@ -33,9 +33,11 @@ object villano inherits Jugador(name = "villano"){
 		if(ultimaDireccion.posicionHabilitada(direccion)){
 			const bomba = new Pinches(image = "Objetos/pinches.png", position = direccion)
 			game.addVisual(bomba) 
+			
 		} else {
 			game.say(self, "No puedo poner una bomba ahi")
 		}
+		return bomba
 	}
 	
 	method usarObjetoVerde(){

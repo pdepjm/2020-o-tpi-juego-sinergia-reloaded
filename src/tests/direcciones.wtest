@@ -1,0 +1,67 @@
+import wollok.game.*
+import utilities.direcciones.*
+import agente.*
+
+describe "Establecer posicion"
+{
+	fixture
+	{
+		agente.positionInicial()
+	}
+	test "Arriba"
+	{
+		assert.equals(game.at(20,7), up.proximo(agente))
+	}	
+	test "Abajo"
+	{
+		assert.equals(game.at(20,5), down.proximo(agente))
+	}	
+	test "Derecha"
+	{
+		assert.equals(game.at(21,6), right.proximo(agente))
+	}	
+	test "Izquierda"
+	{
+		assert.equals(game.at(19,6), left.proximo(agente))
+	}	
+}
+
+describe "Fuera de los limites"
+{
+	test "Limite superior"
+	{
+		assert.notThat(up.dentroDeLosLimites(game.at(4,14)))
+	}
+	test "Limite inferior"
+	{
+		assert.notThat(down.dentroDeLosLimites(game.at(5,0)))
+	}
+	test "Limite derecho"
+	{
+		assert.notThat(right.dentroDeLosLimites(game.at(24,15)))
+	}
+	test "Limite izquierdo"
+	{
+		assert.notThat(left.dentroDeLosLimites(game.at(0,15)))
+	}
+}
+
+describe "Dentro de los limites"
+{
+	test "Limite superior"
+	{
+		assert.that(up.dentroDeLosLimites(game.at(4,13)))
+	}
+	test "Limite inferior"
+	{
+		assert.that(down.dentroDeLosLimites(game.at(5,1)))
+	}
+	test "Limite derecho"
+	{
+		assert.that(right.dentroDeLosLimites(game.at(23,15)))
+	}
+	test "Limite izquierdo"
+	{
+		assert.that(left.dentroDeLosLimites(game.at(1,15)))
+	}
+}
