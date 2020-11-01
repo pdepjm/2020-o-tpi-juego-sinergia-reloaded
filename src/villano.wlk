@@ -11,6 +11,9 @@ import utilities.pantalla.*
 
 object villano inherits Jugador(name = "villano"){
 	const property contrincante = agente
+	const property mensajes = [	"Congelá a tu oponente",
+								"Colocá una trampa",
+								"Arrebata un objeto de tu oponente" ]
 	
 	method esAgente() = false
 	
@@ -44,13 +47,5 @@ object villano inherits Jugador(name = "villano"){
 		agente.perderColeccionable()
 	}
 	
-	method tiempo_partida(){
-		game.schedule(120000, {	my_clock.detener() 
-								game.say(self, "GAME OVER villano: fin del tiempo")
-		})
-		game.schedule(125000, { game.stop() })
-		
-		
-	}
 }
 

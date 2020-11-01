@@ -11,7 +11,11 @@ object agente inherits Jugador(name = "agente"){
 	const property contrincante = villano
 	var property cantidadDeVidas = 3
 	const property objetosColeccionados = []
-	
+	const property mensajes = [	"Congelá a tu oponente",
+								"Recupera una vida",
+								"Activa Telestrasportarse",
+								"Faltan "+ self.objetosRestantesPorColeccionar().toString() + " objetos por recolectar" ]
+					
 	method esAgente() = true
 	
 	override method posicionPoder() = game.at(23,15)
@@ -73,12 +77,12 @@ object agente inherits Jugador(name = "agente"){
 	
 	method guardarColeccionable(coleccionable){ 
 		objetosColeccionados.add(coleccionable)
+		game.say(self, "Faltan "+ self.objetosRestantesPorColeccionar().toString() + " objetos por recolectar")
 		if(objetosColeccionados.size() == 4){
 			game.say(self, "Yo gano hoy, suerte la proxima campeon")
 			game.schedule(3000, {game.stop()})
 		}
 	}
+	
+	method objetosRestantesPorColeccionar() = 4 - objetosColeccionados.size()
 }
-
-
-

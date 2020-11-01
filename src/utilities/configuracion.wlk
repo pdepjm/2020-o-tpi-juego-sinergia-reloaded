@@ -49,11 +49,13 @@ object configuracion{
 	
 	method configurarAcciones(){
 		
-		game.onCollideDo(objetoAzul, {personaje => personaje.guardarObjeto(objetoAzul)})
-		game.onCollideDo(objetoRojo, {personaje => personaje.guardarObjeto(objetoRojo)})
-		game.onCollideDo(objetoVerde, {personaje => personaje.guardarObjeto(objetoVerde)})
-		game.onCollideDo(agente, {objetoEncontrado => objetoEncontrado.interactuar()})
+		game.onCollideDo(objetoAzul, {	personaje => personaje.guardarObjeto(objetoAzul) 
+										game.say(personaje, personaje.mensajes().get(0)) })
+		game.onCollideDo(objetoRojo, {	personaje => personaje.guardarObjeto(objetoRojo)
+										game.say(personaje, personaje.mensajes().get(1)) })
+		game.onCollideDo(objetoVerde, { personaje => personaje.guardarObjeto(objetoVerde)
+										game.say(personaje, personaje.mensajes().get(2)) })
+		game.onCollideDo(agente, {objetoEncontrado => objetoEncontrado.interactuar() })
 		my_clock.iniciar()
-		villano.tiempo_partida()
 	}
 }

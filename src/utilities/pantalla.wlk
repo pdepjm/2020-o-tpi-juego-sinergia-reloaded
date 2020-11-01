@@ -39,25 +39,43 @@ object pantalla {
 
 object my_clock{
 	const init_clock = new Set()
-	const dos_puntos = new Objeto(image = "Objetos/dos_puntos.png", position = game.at(7,15))
-	const posc1 = new Reloj(limite_indice = 9, indice = 0,segundos = 60000,  clock_posc = new Objeto(image = "Objetos/uno.png", position = game.at(6,15)))
-	const posc3 = new Reloj(limite_indice = 5, indice = 4,segundos = 10000,  clock_posc = new Objeto(image = "Objetos/cinco.png", position = game.at(8,15)))
-	const posc4 = new Reloj(limite_indice = 9, indice = 9, segundos = 1000,  clock_posc = new Objeto(image = "Objetos/nueve.png", position = game.at(9,15)))
+	var seg = 120
+	const segundos = new Objeto(image = "Objetos/s.png", position = game.at(9,15))
+	const posc1 = new Reloj( indice = seg.div(100), clock_posc = new Objeto(image = "Objetos/cero.png", position = game.at(6,15)))
+	const posc2 = new Reloj( indice = (seg - (posc1.indice()*100)) / 10, clock_posc = new Objeto(image = "Objetos/cero.png", position = game.at(7,15)))
+	const posc3 = new Reloj( indice = seg - (posc1.indice()*100) -(posc2.indice()*10), clock_posc = new Objeto(image = "Objetos/cero.png", position = game.at(8,15)))
 	
 	method crear_reloj(){
 		init_clock.add(posc1)
+		init_clock.add(posc2)
 		init_clock.add(posc3)
-		init_clock.add(posc4)
 	}
 	
 	method iniciar(){
-		dos_puntos.aparecer()
-		self.crear_reloj()	
-		init_clock.forEach({objeto => objeto.accionar()})
+		segundos.aparecer()
+		self.crear_reloj()
+		init_clock.forEach({objeto => objeto.aparecer()})
+		game.onTick(1000, "reloj", { self.accionar() })		
 	}
 	
-	method detener(){
-		init_clock.forEach({objeto => objeto.stop_time()})
+	method accionar(){
+		if (seg >= 0){
+			init_clock.forEach({objeto => objeto.accionar()})
+			seg --
+			self.set_indice()
+		}
+		else {
+			game.removeTickEvent("reloj")
+			game.say(villano, "GAME OVER villano: fin del tiempo")
+			game.schedule(4000, { game.stop() })
+		}	
 	}
+	
+	method set_indice(){
+		posc1.indice(seg.div(100)) 
+		posc2.indice((seg - (posc1.indice()*100)).div(10))
+		posc3.indice(seg - (posc1.indice()*100) - (posc2.indice()*10))
+	}
+
 }
 

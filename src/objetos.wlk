@@ -33,7 +33,6 @@ class ObjetoAleatorio inherits Objeto{
 }
 
 class ObjetoColeccionable inherits ObjetoAleatorio{
-	
 	var property posicionDestino
 
     method atrapado(){
@@ -58,7 +57,6 @@ class ObjetoColeccionable inherits ObjetoAleatorio{
 }
 
 class Poder inherits ObjetoAleatorio{
-	
 	method crearReplica(direccion){return new Objeto()}
 	
 	method atrapado(){
@@ -72,7 +70,6 @@ class Poder inherits ObjetoAleatorio{
 }
 
 class LiquidoAzul inherits Poder{
-	
 	override method crearReplica(direccion){
 		return new LiquidoAzul(image="Objetos/objeto_azul.png", position = direccion)
 	}
@@ -84,7 +81,6 @@ class LiquidoAzul inherits Poder{
 }
 
 class LiquidoVerde inherits Poder {
-
 	override method crearReplica(direccion){
 		return new LiquidoVerde(image="Objetos/objeto_verde.png", position = direccion)
 	}
@@ -114,30 +110,23 @@ class Pinches inherits Objeto {
 }
 
 class Martillo inherits Objeto {
-	
 	method modificarMapa(persona){
 		const direccion = persona.ultimaDireccion().proximo(persona)
-		if(paredes.posicionDisponible(direccion)){
+		if(paredes.posicionDisponible(direccion))
 			paredes.agregarPared(direccion)
-		} else {
+		else 
 			paredes.sacarPared(direccion)
-		}
 	}
 }
 
 class Reloj inherits Objeto {
-	var limite_indice
-	var indice
-	var property segundos
+	var property indice
 	var property clock_posc
 	const clock = ["cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve"]
 	
-	method accionar(){
-		clock_posc.aparecer()
-		game.onTick(segundos, "reloj_posc",{ self.modificar() })
-	}
+	override method aparecer(){ clock_posc.aparecer()}
 	
-	method modificar(){
+	method accionar(){
 		clock_posc.desaparecer()
 		self.actualizarImagen()
 		clock_posc.aparecer()
@@ -146,35 +135,18 @@ class Reloj inherits Objeto {
 	method actualizarImagen(){
 		const new_image = "Objetos/" + clock.get(indice) + ".png"
 		clock_posc.image(new_image)
-		self.set_indice()
 	}
-	
-	method set_indice(){
-		if(indice == 0)
-			indice = limite_indice
-		else
-			indice--
-	}
-	
-	method stop_time(){
-		game.removeTickEvent("reloj_posc")
-		clock_posc.desaparecer()
-		clock_posc.image("Objetos/cero.png")
-		clock_posc.aparecer()
-	}
-
 }
 
 
 /////////////////////////////
 //--------- VIDAS ---------//
 /////////////////////////////
-
 object vidas {
-	const vida1 = new Objeto(image = "Objetos/vida.png", position = game.at(13,15))
-	const vida2 = new Objeto(image = "Objetos/vida.png", position = game.at(14,15))
-	const vida3 = new Objeto(image = "Objetos/vida.png", position = game.at(15,15))
-	const lista = [vida1, vida2, vida3] // lista de posiciones
+	const lista = [	new Objeto(image = "Objetos/vida.png", position = game.at(13,15)),
+					new Objeto(image = "Objetos/vida.png", position = game.at(14,15)),
+					new Objeto(image = "Objetos/vida.png", position = game.at(15,15))
+				  ] 
 	const ultimaVidaSacada = []
 	
 	method sacar(){
@@ -182,7 +154,7 @@ object vidas {
 		game.removeVisual(ultimaVida)
 		ultimaVidaSacada.add(ultimaVida)
 		lista.remove(ultimaVida)
-		// game.say(icono_agente, "Perdiste una vida")
+		game.say(villano, "jaja, Perdiste una vida")
 	}
 	
 	method agregar(){
