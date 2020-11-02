@@ -10,7 +10,7 @@
 
 **Ventaja:** Se pueden agregar Objetos de poder al tablero para que sean colisionados con los jugadores sin modificar absolutamente nada del código, sólo basta con agregar el objeto o clase que implemente el método usar(personaje)
 		
-<img src="Objetos/polimorfismo1.png">
+<img src="polimorfismo1.png">
 
 ## Colecciones
 
