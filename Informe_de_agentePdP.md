@@ -6,11 +6,35 @@
 
 **Objetos que lo implementan:** objetoAzul, objetoRojo, objetoVerde
 
-**Objeto que lo aprovecha:** agente y villano: en el metodo usarObjeto(), independientemente de que jugador sea (es un metodo heredado de la clase Jugador), este hace objetoEncontrado.usar(self) y no le importa lo hace cada objeto de poder encontrado, sólo los trata polimórficamente. ver grafico 1
+**Objeto que lo aprovecha:** agente y villano: en el metodo ```usarObjeto()```, independientemente de que jugador sea (es un metodo heredado de la clase Jugador), este hace ```objetoEncontrado.usar(self)``` y no le importa lo hace cada objeto de poder encontrado, sólo los trata polimórficamente. ver grafico 1
 
-**Ventaja:** Se pueden agregar Objetos de poder al tablero para que sean colisionados con los jugadores sin modificar absolutamente nada del código, sólo basta con agregar el objeto o clase que implemente el método usar(personaje) <br>
+**Ventaja:** Se pueden agregar Objetos de poder al tablero para que sean colisionados con los jugadores sin modificar absolutamente nada del código, sólo basta con agregar el objeto o clase que implemente el método ```usar(personaje)``` <br>
 
-#### **Grafico 1**
+**Mensaje polimórfico: usarObjetoVerde()**
+
+**Objetos que lo implementan:** agente, villano
+
+**Objeto que lo aprovecha:** objetoVerde: en el metodo ```usar(jugador)``` este hace ```jugador.usarObjetoVerde()``` y no le importa lo hace cada personaje sino que los trata polimórficamente. ver grafico 1
+
+**Ventaja:** Si se quiere agregar un personaje al juego que realice otra accion al utilizar el objetoVerde, solamente hay que agregarle el metodo ```usarObjetoVerde(personaje)``` y dentro de el lo que se quiera. <br>
+
+**Mensaje polimórfico: usarObjetoRojo()**
+
+**Objetos que lo implementan:** agente, villano
+
+**Objeto que lo aprovecha:** objetoRojo: en el metodo ```usar(jugador)``` este hace ```jugador.usarObjetoRojo()``` y no le importa lo hace cada personaje sino que los trata polimórficamente. ver grafico 1
+
+**Ventaja:** Si se quiere agregar un personaje al juego que realice otra accion al utilizar el objetoRojo, solamente hay que agregarle el metodo ```usarObjetoRojo(personaje)``` y dentro de el lo que se quiera. <br>
+
+**Mensaje polimórfico: interactuar()**
+
+**Objetos que lo implementan:** villano, ObjetoColeccionable(class), Pinches(class)
+
+**Objeto que lo aprovecha:** agente: cuando el agente colisiona con un objeto (exepto por el objetoAzul, objetoRojo, objetoVerde), el objeto en cuestion utiliza el metodo ```objeto.interactuar()```. De esta forma el agente no tiene que encargarse de fijarse contra quien colisiona para saber lo que tiene que hacer, sino que manda siempre el mismo mensaje polimorfico.
+
+**Ventaja:** Si se quiere agregar un objeto que tambien pueda colisionar con el agente solo hay que agregarle el metodo ```interactuar()```. Por otro lado, como dijimos antes, el agente no tiene que utilizar una logica de ifs cambiando el mensaje y/o la accion que realiza dependiendo de con quien colisiona, sino que hace siempre lo mismo y es responsabilidad del otro objeto saber que hacer. <br>
+
+#### _**Grafico 1**_
 		
 <img src="polimorfismo1.png">
 
@@ -91,7 +115,7 @@ Hicimos el uso de clases, porque se notó un comportamiento entre distinto objet
 const bomba = new Pinches(image = "Objetos/pinches.png", position = direccion)
 
 1. **Reloj:** es instanciada, por ejemplo, en pantalla.wlk, para referenciar los sgundos del tiempo de la partida, por lo que hay una posicion 1 representa las centenas de los segundos, la posicion las decenas y la posicion 3 las unidades <br>
-```const posc1 = new Reloj( indice = seg.div(100), clock_posc = new Objeto(image = "Objetos/cero.png", position = game.at(6,15)))```
+```const posc1 = new Reloj(indice = seg.div(100), clock_posc = new Objeto(image= "Objetos/cero.png", position= game.at(6,15)))```
 
 ## Herencia
 ### ¿Entre quiénes y por qué? 
@@ -104,28 +128,28 @@ const bomba = new Pinches(image = "Objetos/pinches.png", position = direccion)
 
 - **Padre** ObjetoAleatorio <br>
 	**Hijos**  Poder, ObjetoColeccionable	 <br>
-	**¿por qué?** la clase ObjetoAlatorio es abstracta y define el comportamiento para que la posición de un objeto se genere de forma aleatoria en el mapa. Esto sire de molde para las subclases hijas <br>
+	**¿por qué?** la clase ObjetoAlatorio es abstracta y define el comportamiento para que la posición de un objeto se genere de forma aleatoria en el mapa. Esto sirve de molde para las subclases hijas <br>
 	**¿Qué comportamiento es común y cuál distinto?** <br>
 	_Común:_ tanto los atributos, como los métodos de la clase Objeto y ObjetoAleatorio (se da uso del _method lookup_) <br>
 	_distinto:_  todos los atributos y mensajes que aparecen en la sección de métodos de cada subclase hija (Poder, ObjetoColeccionable). Ver gráfico 2 <br>
 
 - **Padre** Poder <br>
 	**Hijos** LiquidoAzul, LiquidoVerde, LiquidoRojo <br>	
-	**¿por qué?** _FALTA_ <br>
+	**¿por qué?** Sin importar cual sea el liquido en cuestión, los tres tienen un comportamiento similar debido a que son poderes. Concecuentemente, para no repetir codigo se creo una superclase que contenga los metodos básicos que todo poder debe cumplir. <br>
 	**¿Qué comportamiento es común y cuál distinto?** <br>
 	_Común:_ tanto los atributos, como los métodos de la clase Objeto, ObjetoAleatorio Y Poder (se da uso del _method lookup_) <br>
 	_distinto:_  todos los mensajes que aparecen en la seccion de metodos de cada subclase hija (LiquidoAzul, LiquidoVerde, LiquidoRojo). Ver gráfico 2 <br>
 	
 - **Padre** Jugador <br>
 	**Hijos** agente, villano <br>	
-	**¿por qué?** _FALTA_ <br>
+	**¿por qué?** Nuestro juego consta de dos personajes que realizan acciones distintas, sin embargo, también cuentan con una base de funcionamiento similar sobre todo en lo referente al movimiento. Por eso es necesario crear una superclase (Jugador) que abarque los metodos y atributos que son comunes para ambos personajes. <br>
 	**¿Qué comportamiento es común y cuál distinto?**<br>
 	_Común:_ tanto los atributos, como los métodos de la clase Jugador (se da uso del _method lookup_) <br>
-	_distinto:_  todos los mensajes que aparecen en la seccion de metodos de cada subclase hija (LiquidoAzul, LiquidoVerde, LiquidoRojo). Ver gráfico 1 <br>
+	_distinto:_  todos los mensajes que aparecen en la seccion de metodos de cada subclase hija (villano, agente). Ver gráfico 1 <br>
 	
 - **Padre** Direccion <br>
 	**Hijos** up, down, left, rigth	<br>
-	**¿por qué?** _FALTA_ <br>
+	**¿por qué?** Al moverse, los personajes utilizan las direcciones para verificar si la casilla a la cual se quieren mover (su siguiente posicion) esta disponible. A pesar de que la logica de todas las direcciones es la misma, cada una debe verificar la casilla que se encuentra a su lado en distintas direcciones (up verifica casillaActual(y) + 1 / down verifica casillaActual(y) - 1 / left verifica casillaActual(x) - 1 / right verifica casillaActual(x) + 1)<br>
 	**¿Qué comportamiento es común y cuál distinto?** <br>
 	_Común:_ tanto los atributos, como los métodos de la clase Direccion (se da uso del _method lookup_) <br>
 	_distinto:_  todos los mensajes que aparecen en la seccion de metodos de cada objeto hijo (up, down, left, rigth). <br>
