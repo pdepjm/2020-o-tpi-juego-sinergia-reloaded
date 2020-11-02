@@ -131,7 +131,7 @@ const bomba = new Pinches(image = "Objetos/pinches.png", position = direccion)
 	_distinto:_  todos los mensajes que aparecen en la seccion de metodos de cada objeto hijo (up, down, left, rigth). <br>
 
 #### **Grafico 2**
-<img src="herencia.png">
+<img src="herencia.jpg">
 
 
 ## Composición
