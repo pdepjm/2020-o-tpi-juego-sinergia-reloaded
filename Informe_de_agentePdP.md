@@ -6,11 +6,11 @@
 
 **Objetos que lo implementan:** objetoAzul, objetoRojo, objetoVerde
 
-**Objeto que lo aprovecha:** agente y villano: en el metodo usarObjeto(), independientemente de que jugador sea (es un metodo heredado de la clase Jugador), este hace objetoEncontrado.usar(self) y no le importa lo hace cada objeto de poder encontrado, sólo los trata polimórficamente. ver grafico 1
+**Objeto que lo aprovecha:** agente y villano: en el metodo ```usarObjeto()```, independientemente de que jugador sea (es un metodo heredado de la clase Jugador), este hace ```objetoEncontrado.usar(self)``` y no le importa lo hace cada objeto de poder encontrado, sólo los trata polimórficamente. ver grafico 1
 
-**Ventaja:** Se pueden agregar Objetos de poder al tablero para que sean colisionados con los jugadores sin modificar absolutamente nada del código, sólo basta con agregar el objeto o clase que implemente el método usar(personaje) <br>
+**Ventaja:** Se pueden agregar Objetos de poder al tablero para que sean colisionados con los jugadores sin modificar absolutamente nada del código, sólo basta con agregar el objeto o clase que implemente el método ```usar(personaje)``` <br>
 
-#### **Grafico 1**
+#### _**Grafico 1**_
 		
 <img src="polimorfismo1.png">
 
@@ -91,7 +91,7 @@ Hicimos el uso de clases, porque se notó un comportamiento entre distinto objet
 const bomba = new Pinches(image = "Objetos/pinches.png", position = direccion)
 
 1. **Reloj:** es instanciada, por ejemplo, en pantalla.wlk, para referenciar los sgundos del tiempo de la partida, por lo que hay una posicion 1 representa las centenas de los segundos, la posicion las decenas y la posicion 3 las unidades <br>
-```const posc1 = new Reloj( indice = seg.div(100), clock_posc = new Objeto(image = "Objetos/cero.png", position = game.at(6,15)))```
+```const posc1 = new Reloj(indice = seg.div(100), clock_posc = new Objeto(image= "Objetos/cero.png", position= game.at(6,15)))```
 
 ## Herencia
 ### ¿Entre quiénes y por qué? 
@@ -130,7 +130,7 @@ const bomba = new Pinches(image = "Objetos/pinches.png", position = direccion)
 	_Común:_ tanto los atributos, como los métodos de la clase Direccion (se da uso del _method lookup_) <br>
 	_distinto:_  todos los mensajes que aparecen en la seccion de metodos de cada objeto hijo (up, down, left, rigth). <br>
 
-#### **Grafico 2**
+#### _**Grafico 2**_
 <img src="herencia.jpg">
 
 
