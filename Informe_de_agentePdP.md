@@ -104,28 +104,28 @@ const bomba = new Pinches(image = "Objetos/pinches.png", position = direccion)
 
 - **Padre** ObjetoAleatorio <br>
 	**Hijos**  Poder, ObjetoColeccionable	 <br>
-	**¿por qué?** la clase ObjetoAlatorio es abstracta y define el comportamiento para que la posición de un objeto se genere de forma aleatoria en el mapa. Esto sire de molde para las subclases hijas <br>
+	**¿por qué?** la clase ObjetoAlatorio es abstracta y define el comportamiento para que la posición de un objeto se genere de forma aleatoria en el mapa. Esto sirve de molde para las subclases hijas <br>
 	**¿Qué comportamiento es común y cuál distinto?** <br>
 	_Común:_ tanto los atributos, como los métodos de la clase Objeto y ObjetoAleatorio (se da uso del _method lookup_) <br>
 	_distinto:_  todos los atributos y mensajes que aparecen en la sección de métodos de cada subclase hija (Poder, ObjetoColeccionable). Ver gráfico 2 <br>
 
 - **Padre** Poder <br>
 	**Hijos** LiquidoAzul, LiquidoVerde, LiquidoRojo <br>	
-	**¿por qué?** _FALTA_ <br>
+	**¿por qué?** Sin importar cual sea el liquido en cuestión, los tres tienen un comportamiento similar debido a que son poderes. Concecuentemente, para no repetir codigo se creo una superclase que contenga los metodos básicos que todo poder debe cumplir. <br>
 	**¿Qué comportamiento es común y cuál distinto?** <br>
 	_Común:_ tanto los atributos, como los métodos de la clase Objeto, ObjetoAleatorio Y Poder (se da uso del _method lookup_) <br>
 	_distinto:_  todos los mensajes que aparecen en la seccion de metodos de cada subclase hija (LiquidoAzul, LiquidoVerde, LiquidoRojo). Ver gráfico 2 <br>
 	
 - **Padre** Jugador <br>
 	**Hijos** agente, villano <br>	
-	**¿por qué?** _FALTA_ <br>
+	**¿por qué?** Nuestro juego consta de dos personajes que realizan acciones distintas, sin embargo, también cuentan con una base de funcionamiento similar sobre todo en lo referente al movimiento. Por eso es necesario crear una superclase (Jugador) que abarque los metodos y atributos que son comunes para ambos personajes. <br>
 	**¿Qué comportamiento es común y cuál distinto?**<br>
 	_Común:_ tanto los atributos, como los métodos de la clase Jugador (se da uso del _method lookup_) <br>
-	_distinto:_  todos los mensajes que aparecen en la seccion de metodos de cada subclase hija (LiquidoAzul, LiquidoVerde, LiquidoRojo). Ver gráfico 1 <br>
+	_distinto:_  todos los mensajes que aparecen en la seccion de metodos de cada subclase hija (villano, agente). Ver gráfico 1 <br>
 	
 - **Padre** Direccion <br>
 	**Hijos** up, down, left, rigth	<br>
-	**¿por qué?** _FALTA_ <br>
+	**¿por qué?** Al moverse, los personajes utilizan las direcciones para verificar si la casilla a la cual se quieren mover (su siguiente posicion) esta disponible. A pesar de que la logica de todas las direcciones es la misma, cada una debe verificar la casilla que se encuentra a su lado en distintas direcciones (up verifica casillaActual(y) + 1 / down verifica casillaActual(y) - 1 / left verifica casillaActual(x) - 1 / right verifica casillaActual(x) + 1)<br>
 	**¿Qué comportamiento es común y cuál distinto?** <br>
 	_Común:_ tanto los atributos, como los métodos de la clase Direccion (se da uso del _method lookup_) <br>
 	_distinto:_  todos los mensajes que aparecen en la seccion de metodos de cada objeto hijo (up, down, left, rigth). <br>
