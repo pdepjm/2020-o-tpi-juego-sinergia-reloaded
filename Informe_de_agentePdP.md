@@ -6,9 +6,11 @@
 
 **Objetos que lo implementan:** objetoAzul, objetoRojo, objetoVerde
 
-**Objeto que lo aprovecha:** agente y villano: en el metodo usarObjeto(), independientemente de que jugador sea (es un metodo heredado de la clase Jugador), este hace objetoEncontrado.usar(self) y no le importa lo hace cada objeto de poder encontrado, sólo los trata polimórficamente. ver grafico
+**Objeto que lo aprovecha:** agente y villano: en el metodo usarObjeto(), independientemente de que jugador sea (es un metodo heredado de la clase Jugador), este hace objetoEncontrado.usar(self) y no le importa lo hace cada objeto de poder encontrado, sólo los trata polimórficamente. ver grafico 1
 
-**Ventaja:** Se pueden agregar Objetos de poder al tablero para que sean colisionados con los jugadores sin modificar absolutamente nada del código, sólo basta con agregar el objeto o clase que implemente el método usar(personaje)
+**Ventaja:** Se pueden agregar Objetos de poder al tablero para que sean colisionados con los jugadores sin modificar absolutamente nada del código, sólo basta con agregar el objeto o clase que implemente el método usar(personaje) <br>
+
+#### **Grafico 1**
 		
 <img src="Objetos/polimorfismo1.png">
 
@@ -94,46 +96,46 @@ const bomba = new Pinches(image = "Objetos/pinches.png", position = direccion)
 ## Herencia
 ### ¿Entre quiénes y por qué? 
 - **Padre** Objeto <br>
-	**Hijos** ObjetoAleatorio, pinches, martillo, reloj <br>	 
-	**¿por qué?** _falta_ <br>
+	**Hijos** ObjetoAleatorio, Pinches, Martillo, Reloj <br>	 
+	**¿por qué?** Objeto  define el comportamiento básico de todos los objetos del juego, y alcanza con definir los mensajes en esta superclase para que todos los hijos, independientemente de su tipo, entiendan los mismos mensajes y encuentren dicha definición mediante _method lookup_. <br>
 	**¿Qué comportamiento es común y cuál distinto?** <br>
-	en ObjetoAleatorio se redefinio el metodo <br>
+	_Común:_ tanto los atributos, como los métodos de la clase Objeto <br>
+	_distinto:_  todos los atributos y mensajes que aparecen en la sección de métodos de cada subclase hija (ObjetoAleatorio, Pinches, Martillo, Reloj). Ver gráfico 2 <br>
 
 - **Padre** ObjetoAleatorio <br>
-	**Hijos**  ObjetoColeccionable	 <br>
-	**¿por qué?** _falta_ <br>
+	**Hijos**  Poder, ObjetoColeccionable	 <br>
+	**¿por qué?** la clase ObjetoAlatorio es abstracta y define el comportamiento para que la posición de un objeto se genere de forma aleatoria en el mapa. Esto sire de molde para las subclases hijas <br>
 	**¿Qué comportamiento es común y cuál distinto?** <br>
-	_falta_ <br>
-
-- **Padre** ObjetoColeccionable <br>
-	**Hijos** Poder	<br>
-	**¿por qué?** _falta_ <br>
-	**¿Qué comportamiento es común y cuál distinto?** <br>
-	_falta_ <br>
+	_Común:_ tanto los atributos, como los métodos de la clase Objeto y ObjetoAleatorio (se da uso del _method lookup_) <br>
+	_distinto:_  todos los atributos y mensajes que aparecen en la sección de métodos de cada subclase hija (Poder, ObjetoColeccionable). Ver gráfico 2 <br>
 
 - **Padre** Poder <br>
-	**Hijos** OliquidoAzul, liquidoVerde, liquidoRojo <br>	
-	**¿por qué?** _falta_ <br>
+	**Hijos** LiquidoAzul, LiquidoVerde, LiquidoRojo <br>	
+	**¿por qué?** _FALTA_ <br>
 	**¿Qué comportamiento es común y cuál distinto?** <br>
-	_falta_ <br>
+	_Común:_ tanto los atributos, como los métodos de la clase Objeto, ObjetoAleatorio Y Poder (se da uso del _method lookup_) <br>
+	_distinto:_  todos los mensajes que aparecen en la seccion de metodos de cada subclase hija (LiquidoAzul, LiquidoVerde, LiquidoRojo). Ver gráfico 2 <br>
 	
 - **Padre** Jugador <br>
 	**Hijos** agente, villano <br>	
-	**¿por qué?** _falta_ <br>
+	**¿por qué?** _FALTA_ <br>
 	**¿Qué comportamiento es común y cuál distinto?**<br>
-	_falta_ <br>
+	_Común:_ tanto los atributos, como los métodos de la clase Jugador (se da uso del _method lookup_) <br>
+	_distinto:_  todos los mensajes que aparecen en la seccion de metodos de cada subclase hija (LiquidoAzul, LiquidoVerde, LiquidoRojo). Ver gráfico 1 <br>
 	
 - **Padre** Direccion <br>
 	**Hijos** up, down, left, rigth	<br>
-	**¿por qué?** _falta_ <br>
+	**¿por qué?** _FALTA_ <br>
 	**¿Qué comportamiento es común y cuál distinto?** <br>
-	_falta_ <br>
-	
+	_Común:_ tanto los atributos, como los métodos de la clase Direccion (se da uso del _method lookup_) <br>
+	_distinto:_  todos los mensajes que aparecen en la seccion de metodos de cada objeto hijo (up, down, left, rigth). <br>
+
+#### **Grafico 2**
 <img src="herencia.png">
 
 
 ## Composición
 ### ¿Qué objetos interactúan? ¿Dónde se delega? ¿Por qué no herencia?
 
-
+Para nuesTro poryecto no se hizo uso de _composición_, ya que con las clases definidas y el uso de herencia se logró manejar el poliformismo de los mensajes que recibían los objetos de poder, de forma oportuna, por lo que no fue necesario la creación de una interfaz para la manipulación de estos mensajes.
 
