@@ -16,37 +16,37 @@
 
 ### ¿Qué operaciones de colecciones se utilizan? ¿Usaron mensajes con y sin efecto? ¿Para qué?
 operación de Colección	con efecto	sin efecto	¿Para qué?
-* **isEmpty()**	_sin efecto_ Es usada para consultar si una posición en el tablero esta disponible, para esto hacemos una lista de todos los objetos que se encuentran en la posición y después validamos si esta vacía
+* **isEmpty()**	_sin efecto_ Es usada para consultar si una posición en el tablero esta disponible, para esto hacemos una lista de todos los objetos que se encuentran en la posición y después validamos si esta vacía. <br>
 ```game.getObjectsIn(position).isEmpty()```
 
-* **last()** _sin efecto_ Es usada para obtener el último objeto coleccionable obtenido por el agente
+* **last()** _sin efecto_ Es usada para obtener el último objeto coleccionable obtenido por el agente. <br>
 ```objetosColeccionados.last()```
 
-* **remove(objetoPerdido)** _con efecto_ Es usada para eliminar el objeto coleccionable pasado por parametro de la lista del agente, cuando es atacado por un poder del villano
+* **remove(objetoPerdido)** _con efecto_ Es usada para eliminar el objeto coleccionable pasado por parametro de la lista del agente, cuando es atacado por un poder del villano. <br>
 ```objetosColeccionados.remove(objetoPerdido)```
 
-* **add(coleccionable)** _con efecto_ Es usada para agregar a la lista de objetos coleccionbles del agente un nuevo artículo
+* **add(coleccionable)** _con efecto_ Es usada para agregar a la lista de objetos coleccionbles del agente un nuevo artículo. <br>
 ```objetosColeccionados.add(coleccionable)```
 
-* **size()** _sin efecto_ Es usada para objetener la cantidad de objetos recolectados por el agente
+* **size()** _sin efecto_ Es usada para objetener la cantidad de objetos recolectados por el agente. <br>
 ```objetosColeccionados.size()```
 
-* **forEach()** _con efecto_ es usado para mostrar cada uno de los elementos de la lista de vidas
+* **forEach()** _con efecto_ es usado para mostrar cada uno de los elementos de la lista de vidas. <br>
 ```lista.forEach({vida => game.addVisual(vida)})```
 
-	tambien se aplico para que aparecieran los muros del laberinto, entre otros elementos de diseño de la pantalla
+	tambien se aplico para que aparecieran los muros del laberinto, entre otros elementos de diseño de la pantalla. <br>
 	```elementos.forEach({objeto => objeto.aparecer```
 
-	y por ejemplo, para accionar cada posicion del reloj para actualizar la imagen a mostrar de acuerdo a los segundos de my_clock
+	y por ejemplo, para accionar cada posicion del reloj para actualizar la imagen a mostrar de acuerdo a los segundos de my_clock. <br>
 	```init_clock.forEach({objeto => objeto.accionar()})```
 
-* **get(indice)** _sin efecto_	es usado para obtener un string de la lista de clock de acuerdo a la posicion pasada por parametro, para posteriomente actualizar el path de la imagen de una posicion del reloj
+* **get(indice)** _sin efecto_	es usado para obtener un string de la lista de clock de acuerdo a la posicion pasada por parametro, para posteriomente actualizar el path de la imagen de una posicion del reloj. <br>
 ```clock.get(indice)```
 
-* **contains** _sin efecto_ es usado para consultar si la posicion pasado por parametro no pertenece a la coleccion de posiciones ocupadas del objeto paredes y asi validar si es una celda disponible del tablero
+* **contains** _sin efecto_ es usado para consultar si la posicion pasado por parametro no pertenece a la coleccion de posiciones ocupadas del objeto paredes y asi validar si es una celda disponible del tablero. <br>
 ```!posicionesOcupadas.contains(posicion)```
 
-	También es usada con el mismo próposito con el objeto laberinto
+	También es usada con el mismo próposito con el objeto laberinto. <br>
 	```not position_laberinto.contains(position)```
 			
 
@@ -66,29 +66,29 @@ Hicimos el uso de clases, porque se notó un comportamiento entre distinto objet
 1. **Reloj:** define el comportamiento de una de las posiciones del reloj
 
 ### ¿Dónde o cuándo se instancian los objetos?
-1. **objeto:** es instanciada, por ejemplo, en pantalla.wlk, donde se tiene las referencias icono_agente e icono_villano que apunta a objetos que son instancias de esta clase. De igual forma, se encuentran otros objetos de diseño de la pantalla.
+1. **objeto:** es instanciada, por ejemplo, en pantalla.wlk, donde se tiene las referencias icono_agente e icono_villano que apunta a objetos que son instancias de esta clase. De igual forma, se encuentran otros objetos de diseño de la pantalla. <br>
 ```const icono_agente = new Objeto(image = "Objetos/icono_agente.png", position = game.at(11,15))```
 
 1. **ObjetoAleatorio:** no se instancia está clase, ya que es una clase abstracta, que sólo existe para poder compartir código entre sus subclases, no para crear objetos a partir de ella.
 
-1. **ObjetoColeccionable:** es instanciada, por ejemplo, en objetos.wlk, para cada uno de objetos que el agenete debe recoger (4 en total)
+1. **ObjetoColeccionable:** es instanciada, por ejemplo, en objetos.wlk, para cada uno de objetos que el agenete debe recoger (4 en total). <br>
 ```const objetoColeccionable1 = new ObjetoColeccionable(image="Objetos/potion.png", position= game.at(10,8), posicionDestino= game.at(17,15))```
 
 1. **Poder:** no se instancia está clase, ya que es una clase abstracta, que sólo existe para poder compartir código entre sus subclases, no para crear objetos a partir de ella.
 
-1. **LiquidoAzul:** es instanciada, por ejemplo, en objetos.wlk
+1. **LiquidoAzul:** es instanciada en objetos.wlk, para referenciar al objeto de poder azul <br>
 ```const objetoAzul = new LiquidoAzul(image="Objetos/objeto_azul.png", position = game.at(16,5))```	
 
-1. **LiquidoVerde:** es instanciada, por ejemplo, en objetos.wlk
+1. **LiquidoVerde:** es instanciada en objetos.wlk, para referenciar al objeto de poder verde <br>
 ```const objetoVerde = new LiquidoVerde(image="Objetos/objeto_verde.png", position = game.at(4,10))```
 
-1. **LiquidoRojo: es instanciada, por ejemplo, en objetos.wlk
+1. **LiquidoRojo:** es instanciada en objetos.wlk, para referenciar al objeto de poder azul <br>
 ```const objetoRojo = new LiquidoRojo(image="Objetos/objeto_rojo.png", position = game.at(10,9))```
 
-1. **Pinches:** es instanciada, por ejemplo, en villano.wlk, para referencia una "bomba" y poderla mostrar en pantala 
+1. **Pinches:** es instanciada  en villano.wlk, para referenciar una "bomba" y poderla mostrar en pantalla <br>
 const bomba = new Pinches(image = "Objetos/pinches.png", position = direccion)
 
-1. **Reloj:** es instanciada, por ejemplo, en pantalla.wlk, para referenciar los sgundos del tiempo de la partida, por lo que hay una posicion 1 representa las centenas de los segundos, la posicion las decenas y la posicion 3 las unidades
+1. **Reloj:** es instanciada, por ejemplo, en pantalla.wlk, para referenciar los sgundos del tiempo de la partida, por lo que hay una posicion 1 representa las centenas de los segundos, la posicion las decenas y la posicion 3 las unidades <br>
 ```const posc1 = new Reloj( indice = seg.div(100), clock_posc = new Objeto(image = "Objetos/cero.png", position = game.at(6,15)))```
 
 ## Herencia
