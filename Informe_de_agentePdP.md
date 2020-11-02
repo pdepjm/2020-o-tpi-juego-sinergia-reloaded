@@ -10,6 +10,30 @@
 
 **Ventaja:** Se pueden agregar Objetos de poder al tablero para que sean colisionados con los jugadores sin modificar absolutamente nada del código, sólo basta con agregar el objeto o clase que implemente el método ```usar(personaje)``` <br>
 
+**Mensaje polimórfico: usarObjetoVerde()**
+
+**Objetos que lo implementan:** agente, villano
+
+**Objeto que lo aprovecha:** objetoVerde: en el metodo ```usar(jugador)``` este hace ```jugador.usarObjetoVerde()``` y no le importa lo hace cada personaje sino que los trata polimórficamente. ver grafico 1
+
+**Ventaja:** Si se quiere agregar un personaje al juego que realice otra accion al utilizar el objetoVerde, solamente hay que agregarle el metodo ```usarObjetoVerde(personaje)``` y dentro de el lo que se quiera. <br>
+
+**Mensaje polimórfico: usarObjetoRojo()**
+
+**Objetos que lo implementan:** agente, villano
+
+**Objeto que lo aprovecha:** objetoRojo: en el metodo ```usar(jugador)``` este hace ```jugador.usarObjetoRojo()``` y no le importa lo hace cada personaje sino que los trata polimórficamente. ver grafico 1
+
+**Ventaja:** Si se quiere agregar un personaje al juego que realice otra accion al utilizar el objetoRojo, solamente hay que agregarle el metodo ```usarObjetoRojo(personaje)``` y dentro de el lo que se quiera. <br>
+
+**Mensaje polimórfico: interactuar()**
+
+**Objetos que lo implementan:** villano, ObjetoColeccionable(class), Pinches(class)
+
+**Objeto que lo aprovecha:** agente: cuando el agente colisiona con un objeto (exepto por el objetoAzul, objetoRojo, objetoVerde), el objeto en cuestion utiliza el metodo ```objeto.interactuar()```. De esta forma el agente no tiene que encargarse de fijarse contra quien colisiona para saber lo que tiene que hacer, sino que manda siempre el mismo mensaje polimorfico.
+
+**Ventaja:** Si se quiere agregar un objeto que tambien pueda colisionar con el agente solo hay que agregarle el metodo ```interactuar()```. Por otro lado, como dijimos antes, el agente no tiene que utilizar una logica de ifs cambiando el mensaje y/o la accion que realiza dependiendo de con quien colisiona, sino que hace siempre lo mismo y es responsabilidad del otro objeto saber que hacer. <br>
+
 #### _**Grafico 1**_
 		
 <img src="polimorfismo1.png">
