@@ -15,8 +15,6 @@ object villano inherits Jugador(name = "villano"){
 								"Colocá una trampa",
 								"Arrebata un objeto de tu oponente" ]
 	
-	method esAgente() = false
-	
 	override method posicionPoder() = game.at(4,15)
 	
 	override method posicionMartillo() = game.at(3,15)
@@ -24,6 +22,8 @@ object villano inherits Jugador(name = "villano"){
 	override method positionInicial(){
 		self.cambiarPosicion(game.at(6,7))
 	}
+	
+	override method esAgente() = false
 	
 	method interactuar(){
 		self.quedarseQuieto(3000)

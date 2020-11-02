@@ -4,7 +4,7 @@ import paredes.*
 
 class Direccion {
 	const property name
-	method posicionHabilitada(posicion) = self.dentroDeLosLimites(posicion) && paredes.posicionDisponible(posicion)
+	method posicionHabilitada(posicion) = self.dentroDeLosLimites(posicion) and paredes.posicionDisponible(posicion)
 	
 	method posicionMirada(jugador){
 		 const nuevaDireccion = self.proximo(jugador)
@@ -30,21 +30,20 @@ object down inherits Direccion(name = "abajo"){
 
 	override method proximo(jugador) = jugador.position().down(1)
 	
-	override method dentroDeLosLimites(posicion) = posicion.y() > mapa.bordeInferior()
+	override method dentroDeLosLimites(posicion) = posicion.y() > mapa.bordeInferior() 
 }
 
 object left inherits Direccion (name = "izquierda"){
 
 	override method proximo(jugador) = jugador.position().left(1)
 	
-	override method dentroDeLosLimites(posicion) = posicion.x() > mapa.bordeIzquierdo()
-	
+	override method dentroDeLosLimites(posicion) = posicion.x() > mapa.bordeIzquierdo()   
 }
 
 object right inherits Direccion (name = "derecha"){
 	
 	override method proximo(jugador) = jugador.position().right(1)
 	
-	override method dentroDeLosLimites(posicion) = posicion.x() < mapa.bordeDerecho()
+	override method dentroDeLosLimites(posicion) = posicion.x() < mapa.bordeDerecho() 
 	
 }

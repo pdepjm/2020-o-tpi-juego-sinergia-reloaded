@@ -15,8 +15,6 @@ object agente inherits Jugador(name = "agente"){
 								"Recupera una vida",
 								"Activa Telestrasportarse",
 								"Faltan "+ self.objetosRestantesPorColeccionar().toString() + " objetos por recolectar" ]
-					
-	method esAgente() = true
 	
 	override method posicionPoder() = game.at(23,15)
 	
@@ -31,6 +29,7 @@ object agente inherits Jugador(name = "agente"){
 		vidas.mostrar()
 	}
 	
+	override method esAgente() = true
 	
 	method atrapado() {
 		self.perderVida()
@@ -60,7 +59,8 @@ object agente inherits Jugador(name = "agente"){
 	}
 
 	method usarObjetoVerde(){
-		self.cambiarPosicion(aleatorio.nuevaPosicion())
+		const aux = aleatorio.nuevaPosicion()
+		self.cambiarPosicion(aux)
 	}
 		
 	method perderColeccionable() {
@@ -69,7 +69,7 @@ object agente inherits Jugador(name = "agente"){
 			game.say(villano, "El pobre ya no tiene objetos que perder")
 		}
 		else {
-			const objetoPerdido =objetosColeccionados.last()
+			const objetoPerdido = objetosColeccionados.last()
 			objetosColeccionados.remove(objetoPerdido)
 			objetoPerdido.reaparecer()
 		}		

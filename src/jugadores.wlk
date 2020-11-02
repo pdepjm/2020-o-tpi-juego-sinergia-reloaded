@@ -29,6 +29,8 @@ class Jugador{
 		self.habilitarConstruccion()
 	}
 	
+	method esAgente()
+	
 	method usarObjeto(){
 		if(objetoEncontrado!= null){
 		objetoEncontrado.usar(self)
