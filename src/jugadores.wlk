@@ -46,9 +46,8 @@ class Jugador{
 			martillo.desaparecer()
 			game.schedule(5000, {self.habilitarConstruccion()})
 		}
-		else {
+		else 
 			game.say(self, "WARNING: NO se puede destruir")
-		}
 	}
 	
 	method habilitarConstruccion(){
@@ -60,9 +59,8 @@ class Jugador{
 	method moverseA(direccion){
 		ultimaDireccion = direccion
 		self.actualizarImagen()
-		if (movimientosHabilitados){
+		if (movimientosHabilitados)
 			position = direccion.posicionMirada(self)
-		}
 	}
 	
 	method actualizarImagen(){

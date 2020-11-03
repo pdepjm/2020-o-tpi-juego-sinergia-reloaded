@@ -59,8 +59,9 @@ object agente inherits Jugador(name = "agente"){
 	}
 
 	method usarObjetoVerde(){
-		const aux = aleatorio.nuevaPosicion()
-		self.cambiarPosicion(aux)
+		game.removeVisual(self) 
+		self.positionInicial()
+		game.addVisual(self)
 	}
 		
 	method perderColeccionable() {
