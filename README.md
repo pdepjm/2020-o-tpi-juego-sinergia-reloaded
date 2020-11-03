@@ -1,6 +1,6 @@
 # Juego
 
-**Grupo: Sinergia-Reloadad **
+**Grupo: Sinergia-Reloadad**
 
 **Integrantes:**
 * Maximiliano Afonso (https://github.com/mecsafonso)
@@ -26,6 +26,10 @@ Ambos jugadores cuentan con una mecánica completamente original, crear y destru
 * **Poder Azul:**
   * Usado por cualquier personaje: Funciona como un tease, inmoviliza al jugador contrincante por un corto período de tiempo
   
-* **Poder Verde: **
+* **Poder Verde:**
   * Usado por el agente: Funciona como un teletransporte
   * Usado por el villano: Hace que el agente pierda uno de los objetos que recolectó
+  
+ **Controles:**
+ El agente se mueve con las flechitas, construye/destruye con la tecla J y utiliza poderes con la K. 
+ El villano se mueve con awsd, construye/destruye con la tecla Q y utiliza poderes con la E.
