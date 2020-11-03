@@ -33,3 +33,7 @@ Ambos jugadores cuentan con una mecánica completamente original, crear y destru
  **Controles:**
  El agente se mueve con las flechitas, construye/destruye con la tecla J y utiliza poderes con la K. 
  El villano se mueve con awsd, construye/destruye con la tecla Q y utiliza poderes con la E.
+ 
+ 
+ 
+ Esperamos que disfruten el juego, y esperamos feedback!!!
