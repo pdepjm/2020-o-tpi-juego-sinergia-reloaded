@@ -85,7 +85,7 @@ object pantallaIntro {
 	
 	method ejecutar() {
 		portada.aparecer()
-		game.schedule(5000, { portada.desaparecer()
+		game.schedule(7000, { portada.desaparecer()
 							instrucciones.aparecer() })		
 	}
 	

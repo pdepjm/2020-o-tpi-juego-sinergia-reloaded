@@ -36,12 +36,14 @@ object agente inherits Jugador(name = "agente"){
 	}
 	
 	method perderVida() {
+		game.sound("Musica/auch.mp3").play()
 		vidas.sacar()
 		game.say(self, "Auch")
 		cantidadDeVidas -= 1
 		if(cantidadDeVidas == 0){
 			game.say(villano, "Yo gano hoy, suerte la proxima campeon")
 			game.schedule(3000, {game.stop()})
+			game.schedule(1000, {game.sound("Musica/game_over.mp3").play()})
 		}
 	}	
 
@@ -80,6 +82,7 @@ object agente inherits Jugador(name = "agente"){
 		objetosColeccionados.add(coleccionable)
 		game.say(self, "Faltan "+ self.objetosRestantesPorColeccionar().toString() + " objetos por recolectar")
 		if(objetosColeccionados.size() == 4){
+			game.schedule(1000, {game.sound("Musica/cheers.mp3").play()})
 			game.say(self, "Yo gano hoy, suerte la proxima campeon")
 			game.schedule(3000, {game.stop()})
 		}
