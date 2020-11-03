@@ -13,7 +13,9 @@ class Objeto {
 	var property image = "Objetos/objeto_azul.png"
 	var property position = up
 	
-	method guardarObjeto(objeto){}
+	method sonido(){
+		game.sound("Musica/encontrar_objeto.mp3").play()
+	}
 	
 	method aparecer(){
 		game.addVisual(self)
@@ -42,6 +44,7 @@ class ObjetoColeccionable inherits ObjetoAleatorio{
 	}
 	
 	method interactuar(){ 
+		self.sonido()
 		self.atrapado()
 		agente.guardarColeccionable(self)
 	}
@@ -51,7 +54,7 @@ class ObjetoColeccionable inherits ObjetoAleatorio{
 		self.aparecer()
 	}
 	
-	override method guardarObjeto(objeto){
+	method guardarObjeto(objeto){
 		objeto.aparecer()
 	}
 }
@@ -60,6 +63,7 @@ class Poder inherits ObjetoAleatorio{
 	method crearReplica(direccion){return new Objeto()}
 	
 	method atrapado(){
+		self.sonido()
 		self.desaparecer()
 		self.aparecer()
 	}

@@ -80,11 +80,12 @@ object agente inherits Jugador(name = "agente"){
 	
 	method guardarColeccionable(coleccionable){ 
 		objetosColeccionados.add(coleccionable)
-		game.say(self, "Faltan "+ self.objetosRestantesPorColeccionar().toString() + " objetos por recolectar")
 		if(objetosColeccionados.size() == 4){
-			game.schedule(1000, {game.sound("Musica/cheers.mp3").play()})
+			game.sound("Musica/cheers.mp3").play()
 			game.say(self, "Yo gano hoy, suerte la proxima campeon")
 			game.schedule(3000, {game.stop()})
+		} else {
+			game.say(self, "Faltan "+ self.objetosRestantesPorColeccionar().toString() + " objetos por recolectar")
 		}
 	}
 	

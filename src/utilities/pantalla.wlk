@@ -68,6 +68,7 @@ object my_clock{
 			game.removeTickEvent("reloj")
 			game.say(villano, "GAME OVER villano: fin del tiempo")
 			game.schedule(4000, { game.stop() })
+			game.schedule(1000, {game.sound("Musica/game_over.mp3").play()})
 		}	
 	}
 	
