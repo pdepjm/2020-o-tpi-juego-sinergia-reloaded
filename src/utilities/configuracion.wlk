@@ -10,6 +10,9 @@ import utilities.pantalla.*
 import utilities.aleatorio.*
 
 object configuracion{
+	
+
+
 	method iniciar(){
 		self.configurarJuego()
 		teclas.configurar()
@@ -17,6 +20,7 @@ object configuracion{
 		self.agregarPersonajes()
 		self.configurarAcciones()
 		game.start()
+		
 	}
 	
 	method configurarJuego(){
@@ -25,6 +29,8 @@ object configuracion{
 		game.title("Juego Base")
 		game.boardGround("Objetos/piso.png")
 		mapa.configurarMapa()
+		const musica = game.sound("Musica/miusik.mp3")
+		game.schedule(0,{musica.shouldLoop(true) musica.play()})
 	}
 	
 	method agregarPersonajes(){
