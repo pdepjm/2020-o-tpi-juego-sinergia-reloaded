@@ -17,14 +17,14 @@ Cada jugador debe elegir uno de los dos personajes para utilizar en la partida y
 * **El temerario villano**, quien gana cuando el agente muere o no consigue obtener la totalidad de los objetos 
   
   
-Ambos jugadores cuentan con una mecánica completamente original, crear y destruir paredes (Fornite ©) para conseguir la victoria, además, esparzidos por el mapa encontrarán diferentes poderes, que dependiendo el personaje que hayan elegido tendrá un comportamiento diferente (porque... el polimorfismo es un estilo de vida), estos poderes son:
+Ambos jugadores cuentan con una mecánica completamente original, crear y destruir paredes (Fornite ©) para conseguir la victoria, además, esparcidos por el mapa encontrarán diferentes poderes, que dependiendo el personaje que hayan elegido tendrá un comportamiento diferente (porque... el polimorfismo es un estilo de vida), estos poderes son:
 
 * **Poder Rojo:**
   * Usado por el agente: Recupera un vida (curitas)
   * Usado por el villano: Deja una bomba en el mapa, si el agente pisa esta bomba, pierde una vida (nota: la bomba es marca ACME)
 
 * **Poder Azul:**
-  * Usado por cualquier personaje: Funciona como un tease, inmoviliza al jugador contrincante por un corto período de tiempo
+  * Usado por cualquier personaje: Funciona como un teaser, inmoviliza al jugador contrincante por un corto período de tiempo
   
 * **Poder Verde:**
   * Usado por el agente: Funciona como un teletransporte
