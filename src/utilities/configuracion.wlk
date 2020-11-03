@@ -17,7 +17,6 @@ object configuracion{
 		self.agregarPersonajes()
 		self.configurarAcciones()
 		game.start()
-		
 	}
 	
 	method configurarJuego(){
@@ -56,7 +55,7 @@ object configuracion{
 		game.onCollideDo(objetoVerde, { personaje => personaje.guardarObjeto(objetoVerde)
 										game.say(personaje, personaje.mensajes().get(2)) })
 		game.onCollideDo(agente, {objetoEncontrado => objetoEncontrado.interactuar() })
-		//my_clock.iniciar()
+
 		pantallaIntro.ejecutar()
 	}
 }

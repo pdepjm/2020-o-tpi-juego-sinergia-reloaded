@@ -1,6 +1,31 @@
+import wollok.game.*
+import utilities.pantalla.*
 
-test "testX" {
-
-	assert.that(true)
-
-}
+describe "test del reloj" {
+	test "valores inicial de cada posicion del reloj, centenas, decenas, unidades" {
+		my_clock.crear_reloj()
+		assert.equals(1, my_clock.posc1().indice())
+		assert.equals(2, my_clock.posc2().indice())
+		assert.equals(0, my_clock.posc3().indice())	
+	}
+	
+	test "reloj cambia de acuerdo al indice que representa los segundos" {
+		my_clock.crear_reloj()
+		my_clock.seg(100)
+		my_clock.set_indice()
+		assert.equals(1, my_clock.posc1().indice())
+		assert.equals(0, my_clock.posc2().indice())
+		assert.equals(0, my_clock.posc3().indice())	
+	}
+	
+	test "reloj cambia imagen de cada posicion, de acuerdo a los segundos" {
+		my_clock.crear_reloj()
+		my_clock.init_clock().forEach({objeto => objeto.aparecer()})
+		my_clock.seg(105)
+		my_clock.set_indice()
+		my_clock.init_clock().forEach({objeto => objeto.accionar()})
+		assert.equals("Objetos/uno.png", my_clock.posc1().clock_posc().image())
+		assert.equals("Objetos/cero.png", my_clock.posc2().clock_posc().image())
+		assert.equals("Objetos/cinco.png", my_clock.posc3().clock_posc().image())	
+	}
+}	

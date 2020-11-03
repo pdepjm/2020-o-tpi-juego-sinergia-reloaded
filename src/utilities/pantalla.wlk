@@ -38,12 +38,12 @@ object pantalla {
 
 
 object my_clock{
-	const init_clock = new Set()
-	var seg = 120
+	const property init_clock = new Set()
+	var property seg = 120
 	const segundos = new Objeto(image = "Objetos/s.png", position = game.at(9,15))
-	const posc1 = new Reloj( indice = seg.div(100), clock_posc = new Objeto(image = "Objetos/cero.png", position = game.at(6,15)))
-	const posc2 = new Reloj( indice = (seg - (posc1.indice()*100)) / 10, clock_posc = new Objeto(image = "Objetos/cero.png", position = game.at(7,15)))
-	const posc3 = new Reloj( indice = seg - (posc1.indice()*100) -(posc2.indice()*10), clock_posc = new Objeto(image = "Objetos/cero.png", position = game.at(8,15)))
+	const property posc1 = new Reloj( indice = seg.div(100), clock_posc = new Objeto(image = "Objetos/cero.png", position = game.at(6,15)))
+	const property posc2 = new Reloj( indice = (seg - (posc1.indice()*100)) / 10, clock_posc = new Objeto(image = "Objetos/cero.png", position = game.at(7,15)))
+	const property posc3 = new Reloj( indice = seg - (posc1.indice()*100) -(posc2.indice()*10), clock_posc = new Objeto(image = "Objetos/cero.png", position = game.at(8,15)))
 	
 	method crear_reloj(){
 		init_clock.add(posc1)
