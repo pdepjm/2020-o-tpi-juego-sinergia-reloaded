@@ -135,21 +135,21 @@ const bomba = new Pinches(image = "Objetos/pinches.png", position = direccion)
 
 - **Padre** Poder <br>
 	**Hijos** LiquidoAzul, LiquidoVerde, LiquidoRojo <br>	
-	**¿por qué?** Sin importar cual sea el liquido en cuestión, los tres tienen un comportamiento similar debido a que son poderes. Concecuentemente, para no repetir codigo se creo una superclase que contenga los metodos básicos que todo poder debe cumplir. <br>
+	**¿por qué?** Sin importar cual sea el liquido en cuestión, los tres tienen un comportamiento similar debido a que son poderes. Consecuentemente, para no repetir código se creó una superclase que contenga los métodos básicos que todo poder debe cumplir. <br>
 	**¿Qué comportamiento es común y cuál distinto?** <br>
 	_Común:_ tanto los atributos, como los métodos de la clase Objeto, ObjetoAleatorio Y Poder (se da uso del _method lookup_) <br>
 	_distinto:_  todos los mensajes que aparecen en la seccion de metodos de cada subclase hija (LiquidoAzul, LiquidoVerde, LiquidoRojo). Ver gráfico 2 <br>
 	
 - **Padre** Jugador <br>
 	**Hijos** agente, villano <br>	
-	**¿por qué?** Nuestro juego consta de dos personajes que realizan acciones distintas, sin embargo, también cuentan con una base de funcionamiento similar sobre todo en lo referente al movimiento. Por eso es necesario crear una superclase (Jugador) que abarque los metodos y atributos que son comunes para ambos personajes. <br>
+	**¿por qué?** Nuestro juego consta de dos personajes que realizan acciones distintas, sin embargo, también cuentan con una base de funcionamiento similar sobre todo en lo referente al movimiento. Por eso es necesario crear una superclase (Jugador) que abarque los métodos y atributos que son comunes para ambos personajes. <br>
 	**¿Qué comportamiento es común y cuál distinto?**<br>
 	_Común:_ tanto los atributos, como los métodos de la clase Jugador (se da uso del _method lookup_) <br>
 	_distinto:_  todos los mensajes que aparecen en la seccion de metodos de cada subclase hija (villano, agente). Ver gráfico 1 <br>
 	
 - **Padre** Direccion <br>
 	**Hijos** up, down, left, rigth	<br>
-	**¿por qué?** Al moverse, los personajes utilizan las direcciones para verificar si la casilla a la cual se quieren mover (su siguiente posicion) esta disponible. A pesar de que la logica de todas las direcciones es la misma, cada una debe verificar la casilla que se encuentra a su lado en distintas direcciones (up verifica casillaActual(y) + 1 / down verifica casillaActual(y) - 1 / left verifica casillaActual(x) - 1 / right verifica casillaActual(x) + 1)<br>
+	**¿por qué?** Al moverse, los personajes utilizan las direcciones para verificar si la casilla a la cual se quieren mover (su siguiente posición) está disponible. A pesar de que la lógica de todas las direcciones es la misma, cada una debe verificar la casilla que se encuentra a su lado en distintas direcciones (```up``` verifica ```casillaActual(y) + 1``` / ```down``` verifica ```casillaActual(y) - 1``` / ```left``` verifica ```casillaActual(x) - 1``` / ```right``` verifica ```casillaActual(x) + 1)``` <br>
 	**¿Qué comportamiento es común y cuál distinto?** <br>
 	_Común:_ tanto los atributos, como los métodos de la clase Direccion (se da uso del _method lookup_) <br>
 	_distinto:_  todos los mensajes que aparecen en la seccion de metodos de cada objeto hijo (up, down, left, rigth). <br>
