@@ -13,8 +13,8 @@ XXXXX es un juego local de estrategia en tiempo real con modalidad 1v1 en el cua
 
 Cada jugador debe elegir uno de los dos personajes para utilizar en la partida y conseguir la victoria:
 
-* El bondadoso agente, que debe conseguir los 5 objetos malditos escondidos por el mapa antes de que se acabe el tiempo para ganar (2 minutos disponibles) ,o 
-* El temerario villano, quien gana cuando el agente muere o no consigue obtener la totalidad de los objetos 
+* **El bondadoso agente**, que debe conseguir los 5 objetos malditos escondidos por el mapa antes de que se acabe el tiempo para ganar (2 minutos disponibles) ,o 
+* **El temerario villano**, quien gana cuando el agente muere o no consigue obtener la totalidad de los objetos 
   
   
 Ambos jugadores cuentan con una mecánica completamente original, crear y destruir paredes (Fornite ©) para conseguir la victoria, además, esparzidos por el mapa encontrarán diferentes poderes, que dependiendo el personaje que hayan elegido tendrá un comportamiento diferente (porque... el polimorfismo es un estilo de vida), estos poderes son:
