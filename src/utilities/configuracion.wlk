@@ -56,6 +56,7 @@ object configuracion{
 		game.onCollideDo(objetoVerde, { personaje => personaje.guardarObjeto(objetoVerde)
 										game.say(personaje, personaje.mensajes().get(2)) })
 		game.onCollideDo(agente, {objetoEncontrado => objetoEncontrado.interactuar() })
-		my_clock.iniciar()
+		//my_clock.iniciar()
+		pantallaIntro.ejecutar()
 	}
 }

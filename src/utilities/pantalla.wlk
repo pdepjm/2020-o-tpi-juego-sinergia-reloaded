@@ -76,6 +76,25 @@ object my_clock{
 		posc2.indice((seg - (posc1.indice()*100)).div(10))
 		posc3.indice(seg - (posc1.indice()*100) - (posc2.indice()*10))
 	}
+}
 
+object pantallaIntro {
+	var inicio = true
+	const portada = new Objeto (image = "Objetos/portada.png", position = game.at(0,0))
+	const instrucciones = new Objeto (image = "Objetos/instrucciones.png", position = game.at(0,0))
+	
+	method ejecutar() {
+		portada.aparecer()
+		game.schedule(5000, { portada.desaparecer()
+							instrucciones.aparecer() })		
+	}
+	
+	method iniciar(){
+		if (inicio){
+			instrucciones.desaparecer()
+			my_clock.iniciar()
+			inicio = false
+		}
+	}
 }
 

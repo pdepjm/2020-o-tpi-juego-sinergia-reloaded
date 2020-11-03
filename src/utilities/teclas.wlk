@@ -2,6 +2,7 @@ import wollok.game.*
 import jugadores.*
 import villano.*
 import agente.*
+import utilities.pantalla.*
 import utilities.direcciones.*
 
 object teclas{
@@ -25,6 +26,9 @@ object teclas{
 		// Habilidades y Objetos Personaj 2
 		keyboard.l().onPressDo ({agente.modificarMapa()})
 		keyboard.k().onPressDo ({agente.usarObjeto()})	
+		
+		// iniciar a jugar
+		keyboard.enter().onPressDo ({pantallaIntro.iniciar()})	
 		
 		}
 	method desconfigurar(jugador){
