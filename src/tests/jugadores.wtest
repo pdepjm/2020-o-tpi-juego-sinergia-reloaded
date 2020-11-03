@@ -82,7 +82,7 @@ describe "Movimiento de un jugador"
 	}
 } 
 
-
+/* 
 describe "Interacción villano-agente"
 {
 	 
@@ -99,7 +99,7 @@ describe "Interacción villano-agente"
 		assert.equals(2, agente.cantidadDeVidas())
 	}
 }
-
+*/
 
 
 

@@ -18,13 +18,13 @@ describe "Interacción con los objetos"
 		villano.positionInicial()	// (6,7)
 		game.addVisual(objeto1)
 	}
-	
+	/* 
 	test "Cuando un jugador se encuentra con un objeto, se añade a su inventario"
 	{
 		villano.moverseA(right)
 		assert.equals(game.at(4,15), villano.guardarObjeto(objeto1).position())
 	}
-	
+	*/
 	test "Cuando el agente se encuentra con un objeto coleccionable, se añade a su inventario"
 	{
 		agente.guardarColeccionable(coleccionable)
@@ -49,7 +49,7 @@ describe "Personajes usan sus poderes"
 		game.addVisual(otroObjetoVerde)
 		game.addVisual(objetoColeccionable)
 	}
-	
+	/*
 	test "Cuando el villano usa el objeto rojo pone unos pinches"
 	{
 		villano.moverseA(down) 		// (6,6) y mira para abajo
@@ -80,7 +80,7 @@ describe "Personajes usan sus poderes"
 		agente.usarObjetoRojo()
 		assert.equals(3, agente.cantidadDeVidas())
 	}
-	
+	*/
 	test "Cuando el agente usa el objeto verde, se teletransporta a su posicion inicial"
 	{
 		agente.usarObjetoVerde()
