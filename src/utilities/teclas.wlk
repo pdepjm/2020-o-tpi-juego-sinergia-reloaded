@@ -6,10 +6,11 @@ import utilities.pantalla.*
 import utilities.direcciones.*
 
 object teclas{
+	var property control = true
 	
 	method configurar(){
-		
-		// Mover Personaje 1
+		if (control) {
+					// Mover Personaje 1
 		keyboard.w().onPressDo({villano.moverseA(up)})
 		keyboard.d().onPressDo({villano.moverseA(right)})
 		keyboard.s().onPressDo({villano.moverseA(down)})
@@ -26,13 +27,23 @@ object teclas{
 		// Habilidades y Objetos Personaj 2
 		keyboard.l().onPressDo ({agente.modificarMapa()})
 		keyboard.k().onPressDo ({agente.usarObjeto()})	
-		
-		// iniciar a jugar
-		keyboard.enter().onPressDo ({pantallaIntro.iniciar()})	
-		
 		}
+	}
+	
 	method desconfigurar(jugador){
 		jugador.quieto()
+	}
+	
+	method inhabilitar_teclas(){
+		control = false
+	}
+	
+	method configurar_anexo(){
+		// iniciar a jugar
+		keyboard.enter().onPressDo({pantallaIntro.accionar()})	
+		keyboard.i().onPressDo({comandos_game.accionar()})	
+		//keyboard.p().onPressDo({play_again.accionar()})	
+		keyboard.o().onPressDo({exit_game.accionar()})	
 	}
 		
 }

@@ -168,7 +168,6 @@ object vidas {
 	method mostrar(){
 		lista.forEach({vida => game.addVisual(vida)})
 	}
-	
 }
 
 

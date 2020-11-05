@@ -2,9 +2,15 @@ import wollok.game.*
 import objetos.*
 import agente.*
 import villano.*
+import configuracion.*
+import teclas.*
+
+const musica = game.sound("Musica/miusik.mp3")
 
 const icono_agente = new Objeto(image = "Objetos/icono_agente.png", position = game.at(11,15))
 const icono_villano = new Objeto(image = "Objetos/icono_villano.png", position = game.at(1,15))
+
+
 
 
 object pantalla {
@@ -39,7 +45,7 @@ object pantalla {
 
 object my_clock{
 	const property init_clock = new Set()
-	var property seg = 120
+	var property seg = 20
 	const segundos = new Objeto(image = "Objetos/s.png", position = game.at(9,15))
 	const property posc1 = new Reloj( indice = seg.div(100), clock_posc = new Objeto(image = "Objetos/cero.png", position = game.at(6,15)))
 	const property posc2 = new Reloj( indice = (seg - (posc1.indice()*100)) / 10, clock_posc = new Objeto(image = "Objetos/cero.png", position = game.at(7,15)))
@@ -67,7 +73,7 @@ object my_clock{
 		else {
 			game.removeTickEvent("reloj")
 			game.say(villano, "GAME OVER villano: fin del tiempo")
-			game.schedule(4000, { game.stop() })
+			game.schedule(1000, {gameOver.control(true) gameOver.accionar(villano) })
 		}	
 	}
 	
@@ -76,25 +82,115 @@ object my_clock{
 		posc2.indice((seg - (posc1.indice()*100)).div(10))
 		posc3.indice(seg - (posc1.indice()*100) - (posc2.indice()*10))
 	}
+	
+	method setear(){
+		seg = 10
+		init_clock.clear()
+	}
 }
 
+
+
 object pantallaIntro {
-	var inicio = true
+	var control = true
 	const portada = new Objeto (image = "Objetos/portada.png", position = game.at(0,0))
-	const instrucciones = new Objeto (image = "Objetos/instrucciones.png", position = game.at(0,0))
+	const instruccion = new Objeto (image = "Objetos/instrucciones.png", position = game.at(0,0))
 	
 	method ejecutar() {
 		portada.aparecer()
-		game.schedule(5000, { portada.desaparecer()
-							instrucciones.aparecer() })		
+		game.schedule(5000, { 	portada.desaparecer()
+								instruccion.aparecer() 						
+								comandos_game.control(true)})		
 	}
 	
-	method iniciar(){
-		if (inicio){
-			instrucciones.desaparecer()
+	method accionar(){
+		if (control){
+			instruccion.desaparecer()
+			musica.pause()
 			my_clock.iniciar()
-			inicio = false
+			control = false
 		}
 	}
 }
+
+
+
+object comandos_game{
+	var property control = true
+	const comandos = new Objeto (image = "Objetos/comandos.png", position = game.at(0,0))
+	const i = new Objeto (image = "Objetos/i.png", position = game.at(6,1))
+	const i2 = new Objeto (image = "Objetos/i2.png", position = game.at(6,1))
+	
+	method accionar(){
+		if (control){
+			comandos.aparecer()
+			i.aparecer()
+			control = false
+		}
+		else {
+			control = true	
+			i2.aparecer() 	
+			i.desaparecer()
+			game.schedule(500, { i2.desaparecer() comandos.desaparecer() })			
+			
+		}
+	}
+}
+
+
+
+
+object gameOver{
+	var property control = true
+	const mygame = new Objeto (image = "Objetos/gameOverFondo.png", position = game.at(0,0))
+	const over = new Objeto (image = "Objetos/gameover.png", position = game.at(7,8))
+	const winner = new Objeto (image = "Objetos/winner.png", position = game.at(8,7))
+	const o = new Objeto (image = "Objetos/o.png", position = game.at(7,3))
+	const icono_agente = new Objeto(image = "Objetos/icono_agente.png", position = game.at(11,11))
+	const icono_villano = new Objeto(image = "Objetos/icono_villano.png", position = game.at(11,11))
+	
+	method accionar(personaje){
+		teclas.inhabilitar_teclas()
+		musica.resume()
+		mygame.aparecer()
+		
+		if (control){
+			over.aparecer()
+		}
+		else{
+			winner.aparecer()
+			if (personaje.name() == "agente")
+				icono_agente.aparecer()
+			else
+				icono_villano.aparecer()
+		}
+		o.aparecer()
+		exit_game.control(true)
+	}
+	
+}
+		
+
+
+object exit_game{
+	var posicion = game.at(7,3)
+	var property control = false
+	var property o2 = new Objeto (image = "Objetos/o2.png", position = posicion)
+	
+	method accionar(){
+		if (control){
+			game.getObjectsIn(posicion).clear() /*tecla o */
+			o2.aparecer()
+			game.schedule(1000, { game.stop() })
+		}
+	}
+	
+	method posicion(nuevaPosicion) { posicion = nuevaPosicion}
+}
+
+
+
+
+	
+
 

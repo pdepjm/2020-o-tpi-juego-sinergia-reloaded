@@ -21,6 +21,7 @@ class Jugador{
 	const martillo = new Martillo(image = "Objetos/martillo.png", position = self.posicionMartillo())
 	
 	method position(nuevaPosition){ position = nuevaPosition}
+	method name() = name
 	
 	method iniciar(){
 		self.actualizarImagen()

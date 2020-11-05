@@ -16,9 +16,11 @@ object configuracion{
 	method iniciar(){
 		self.configurarJuego()
 		teclas.configurar()
+		teclas.configurar_anexo()
 		self.agregarObjetos()
 		self.agregarPersonajes()
 		self.configurarAcciones()
+		pantallaIntro.ejecutar()
 		game.start()
 		
 	}
@@ -29,7 +31,6 @@ object configuracion{
 		game.title("Juego Base")
 		game.boardGround("Objetos/piso.png")
 		mapa.configurarMapa()
-		const musica = game.sound("Musica/miusik.mp3")
 		game.schedule(0,{musica.shouldLoop(true) musica.play()})
 	}
 	
@@ -61,7 +62,8 @@ object configuracion{
 		game.onCollideDo(objetoVerde, { personaje => personaje.guardarObjeto(objetoVerde)
 										game.say(personaje, personaje.mensajes().get(2)) })
 		game.onCollideDo(agente, {objetoEncontrado => objetoEncontrado.interactuar() })
-
-		pantallaIntro.ejecutar()
 	}
+	
+
+
 }
