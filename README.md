@@ -14,7 +14,7 @@ _El Agente de P.d.P._ es un juego local de estrategia en tiempo real con modalid
 Cada jugador debe elegir uno de los dos personajes para utilizar en la partida y conseguir la victoria:
 
 * **El valiente agente**, que debe conseguir los 4 objetos malditos escondidos por el mapa antes de que se acabe el tiempo para ganar (2 minutos disponibles) ,o 
-* **El temerario villano**, quien gana cuando el agente muere o no consigue obtener la totalidad de los objetos 
+* **El temerario villano**, quien gana cuando el agente muere 
   
   
 Ambos jugadores cuentan con una mecánica completamente original, crear y destruir paredes _(Fornite ©)_ para conseguir la victoria, además, esparcidos por el mapa encontrarán diferentes poderes, que dependiendo el personaje que hayan elegido tendrá un comportamiento diferente _(porque... el polimorfismo es un estilo de vida)_, estos poderes son:
