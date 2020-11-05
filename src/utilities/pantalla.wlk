@@ -45,7 +45,7 @@ object pantalla {
 
 object my_clock{
 	const property init_clock = new Set()
-	var property seg = 20
+	var property seg = 120
 	const segundos = new Objeto(image = "Objetos/s.png", position = game.at(9,15))
 	const property posc1 = new Reloj( indice = seg.div(100), clock_posc = new Objeto(image = "Objetos/cero.png", position = game.at(6,15)))
 	const property posc2 = new Reloj( indice = (seg - (posc1.indice()*100)) / 10, clock_posc = new Objeto(image = "Objetos/cero.png", position = game.at(7,15)))

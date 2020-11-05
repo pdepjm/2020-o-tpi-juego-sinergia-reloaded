@@ -41,7 +41,8 @@ object agente inherits Jugador(name = "agente"){
 		cantidadDeVidas -= 1
 		if(cantidadDeVidas == 0){
 			game.say(villano, "Yo gano hoy, suerte la proxima campeon")
-			game.schedule(1000, { game.removeTickEvent("reloj") gameOver.control(false) gameOver.accionar(villano)})
+			game.schedule(500, {game.sound("Musica/game_over.mp3").play()})
+			game.schedule(3000, { game.removeTickEvent("reloj") gameOver.control(false) gameOver.accionar(villano)})
 		}
 	}	
 
