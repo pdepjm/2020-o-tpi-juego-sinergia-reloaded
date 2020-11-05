@@ -13,8 +13,7 @@ object agente inherits Jugador(name = "agente"){
 	const property objetosColeccionados = []
 	const property mensajes = [	"Congelá a tu oponente",
 								"Recupera una vida",
-								"Activa Telestrasportarse",
-								"Faltan "+ self.objetosRestantesPorColeccionar().toString() + " objetos por recolectar" ]
+								"Activa Telestrasportarse"]
 	
 	override method posicionPoder() = game.at(23,15)
 	
@@ -36,6 +35,7 @@ object agente inherits Jugador(name = "agente"){
 	}
 	
 	method perderVida() {
+		game.sound("Musica/auch.mp3").play()
 		vidas.sacar()
 		game.say(self, "Auch")
 		cantidadDeVidas -= 1
@@ -78,10 +78,12 @@ object agente inherits Jugador(name = "agente"){
 	
 	method guardarColeccionable(coleccionable){ 
 		objetosColeccionados.add(coleccionable)
-		game.say(self, "Faltan "+ self.objetosRestantesPorColeccionar().toString() + " objetos por recolectar")
 		if(objetosColeccionados.size() == 4){
+			game.sound("Musica/cheers.mp3").play()
 			game.say(self, "Yo gano hoy, suerte la proxima campeon")
 			game.schedule(100, { game.removeTickEvent("reloj") gameOver.control(false) gameOver.accionar(self)})
+		} else {
+			game.say(self, "Faltan "+ self.objetosRestantesPorColeccionar().toString() + " objetos por recolectar")
 		}
 	}
 	

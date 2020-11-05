@@ -74,6 +74,7 @@ object my_clock{
 			game.removeTickEvent("reloj")
 			game.say(villano, "GAME OVER villano: fin del tiempo")
 			game.schedule(1000, {gameOver.control(true) gameOver.accionar(villano) })
+			game.schedule(1000, {game.sound("Musica/game_over.mp3").play()})
 		}	
 	}
 	

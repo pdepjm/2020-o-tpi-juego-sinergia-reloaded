@@ -34,8 +34,10 @@ object villano inherits Jugador(name = "villano"){
 	method usarObjetoRojo(){
 		const direccion = self.ultimaDireccion().proximo(self)
 		if(game.getObjectsIn(direccion).isEmpty()){
+			const bomb = game.sound("Musica/bomb.mp3")
 			const bomba = new Pinches(image = "Objetos/pinches.png", position = direccion)
 			game.addVisual(bomba) 
+			bomb.play()
 			
 		} else {
 			game.say(self, "No puedo poner una bomba ahi")

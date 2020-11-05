@@ -48,7 +48,7 @@ class Jugador{
 			game.schedule(5000, {self.habilitarConstruccion()})
 		}
 		else 
-			game.say(self, "WARNING: NO se puede destruir")
+			game.say(self, "WARNING:  no es posible realizar la accion")
 	}
 	
 	method habilitarConstruccion(){
