@@ -40,6 +40,7 @@ object agente inherits Jugador(name = "agente"){
 		game.say(self, "Auch")
 		cantidadDeVidas -= 1
 		if(cantidadDeVidas == 0){
+			self.inmovilizar()
 			game.say(villano, "Yo gano hoy, suerte la proxima campeon")
 			game.schedule(500, {game.sound("Musica/game_over.mp3").play()})
 			game.schedule(3000, { game.removeTickEvent("reloj") gameOver.control(false) gameOver.accionar(villano)})
@@ -80,6 +81,7 @@ object agente inherits Jugador(name = "agente"){
 	method guardarColeccionable(coleccionable){ 
 		objetosColeccionados.add(coleccionable)
 		if(objetosColeccionados.size() == 4){
+			villano.inmovilizar()
 			game.sound("Musica/cheers.mp3").play()
 			game.say(self, "Yo gano hoy, suerte la proxima campeon")
 			game.schedule(100, { game.removeTickEvent("reloj") gameOver.control(false) gameOver.accionar(self)})

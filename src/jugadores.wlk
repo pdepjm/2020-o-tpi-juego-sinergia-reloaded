@@ -69,8 +69,12 @@ class Jugador{
 	}
 	
 	method quedarseQuieto(milisegundos){
-		movimientosHabilitados = false
+		self.inmovilizar()
 		game.schedule(milisegundos, {=>movimientosHabilitados = true})
+	}
+	
+	method inmovilizar(){
+		movimientosHabilitados = false
 	}
 	
 	method guardarObjeto(objeto){
